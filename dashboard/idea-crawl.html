@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kho thẻ idea — Idea Crawl</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#fff8ef; --ink:#1d1b2f; --muted:#5b5870; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(circle at 8% 0%, #ffe1ef 0, transparent 42%),
+      radial-gradient(circle at 92% 8%, #e2dcff 0, transparent 40%),
+      radial-gradient(circle at 50% 100%, #d6fff6 0, transparent 46%),
+      var(--bg);
+    min-height: 100vh;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 22px 16px 64px; }
+  .home {
+    display: inline-flex; align-items: center; text-decoration: none; font-weight: 700;
+    font-size: 13px; background: #fff; color: var(--ink); border-radius: 999px;
+    padding: 6px 12px; box-shadow: 0 2px 8px #0001;
+  }
+  .kicker { font-family: "Caveat", cursive; font-size: 28px; margin: 12px 0 0; color: #7c5cff; }
+  h1 {
+    margin: 0; font-family: "Caveat", cursive; font-size: clamp(34px, 5vw, 48px); line-height: 1.02;
+    background: linear-gradient(90deg, #ff4d8d, #7c5cff, #00c2a8);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sub { color: var(--muted); margin: 6px 0 14px; font-size: 14px; max-width: 72ch; line-height: 1.55; }
+  .stats { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .stat { background: #fff; border-radius: 14px; padding: 8px 12px; box-shadow: 0 2px 10px #0001; font-size: 13px; }
+  .stat b { font-size: 18px; }
+  nav.days {
+    position: sticky; top: 0; z-index: 5;
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    background: rgba(255, 248, 239, .94); backdrop-filter: blur(8px);
+    padding: 8px 0; margin: 0 0 8px; border-bottom: 2px solid #efe6da;
+  }
+  nav.days b { font-size: 13px; }
+  nav.days a {
+    text-decoration: none; background: #fff; color: var(--ink); border-radius: 999px;
+    padding: 6px 12px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 8px #0001;
+    border: 2px solid transparent;
+  }
+  nav.days a.on, nav.days a:hover { border-color: var(--ink); }
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+  .tab {
+    border: 0; border-radius: 999px; padding: 10px 16px; font-weight: 700; cursor: pointer;
+    background: #fff; box-shadow: 0 2px 8px #0001; font-family: inherit; font-size: 14px; color: var(--ink);
+  }
+  .tab.on { background: var(--ink); color: #fff; }
+  .toolbar { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 4px 0 16px; }
+  input#q {
+    width: 100%; max-width: 360px; padding: 9px 14px; border-radius: 12px;
+    border: 1px solid #e4d8ea; font-size: 14px; font-family: inherit; background: #fff;
+  }
+  .chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    border: 2px solid transparent; border-radius: 999px; padding: 6px 12px; cursor: pointer;
+    font-size: 13px; font-weight: 700; background: #fff; font-family: inherit; color: var(--ink);
+  }
+  .chip.on { border-color: var(--ink); }
+  .day { margin: 0 0 26px; scroll-margin-top: 58px; }
+  .day-head h2 { font-family: "Caveat", cursive; font-size: 34px; margin: 0; line-height: 1; }
+  .meta { color: var(--muted); font-size: 13px; margin: 2px 0 10px; line-height: 1.45; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+  .card {
+    background: #fff; border-radius: 18px; padding: 14px 14px 12px;
+    box-shadow: 0 4px 18px #0000000f; border-top: 6px solid var(--c, #ccc);
+    display: flex; flex-direction: column; min-width: 0;
+  }
+  .card.star { outline: 3px dashed #ffb703; outline-offset: 2px; }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .tchip { background: var(--c); color: #fff; border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 800; }
+  .score { font-weight: 800; font-size: 13px; color: var(--c); }
+  .card h3 { margin: 2px 0 6px; font-size: 16.5px; line-height: 1.35; }
+  .prev {
+    font-size: 13.5px; color: #3d3a52; line-height: 1.5;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .meta-row { margin-top: 8px; }
+  .date-badge { background: #1d1b2f; color: #fff; border-radius: 999px; padding: 2px 8px; font-size: 11px; font-weight: 800; }
+  details { margin-top: 8px; border-top: 1px dashed #e5e2ef; padding-top: 6px; }
+  summary { cursor: pointer; font-weight: 800; font-size: 13px; color: var(--c); }
+  dl { margin: 8px 0 0; font-size: 13.5px; line-height: 1.5; }
+  dt { font-weight: 800; margin-top: 8px; color: #2b2840; }
+  dd { margin: 2px 0 0; }
+  dd a { color: #5a3fe0; }
+  .foot { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+  .btn {
+    border: 0; border-radius: 10px; padding: 6px 12px; font-weight: 800; cursor: pointer;
+    font-size: 12.5px; background: #f1eefc; font-family: inherit; color: var(--ink);
+  }
+  .btn.ok { background: #d8fbef; color: #057a5f; }
+  .empty { display: none; text-align: center; padding: 36px 16px; color: #7a7790; background: #fff; border-radius: 18px; }
+  .note { font-size: 12.5px; color: #6b6880; margin-top: 22px; line-height: 1.6; }
+  .note a { color: #5a3fe0; }
+  .badge {
+    background: #ffb703; color: #1d1b2f; border-radius: 6px; padding: 1px 6px;
+    font-size: 11px; font-weight: 800; margin-left: 6px; white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: 1fr; }
+    .wrap { padding: 14px 10px 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="home" href="../index.html">← Kho Tổng</a>
+  <p class="kicker">Idea Crawl · Asia/Saigon</p>
+  <h1>Kho thẻ idea</h1>
+  <p class="sub">Thẻ tích lũy theo ngày — Game, Web Distill, FB pain→offer, Webapp AI. Ngày mới nằm trên cùng, ngày cũ giữ nguyên. ⭐ = đề xuất làm ngay. Số liệu và trích dẫn nằm trong mục Chi tiết.</p>
+  <div class="stats" id="stats"></div>
+  <nav class="days" id="days"><b>Các ngày:</b></nav>
+  <div class="tabs">
+    <button type="button" class="tab on" data-tab="wait">⏳ Chờ duyệt (<span id="nw">0</span>)</button>
+    <button type="button" class="tab" data-tab="ok">✅ Đã duyệt (<span id="no">0</span>)</button>
+  </div>
+  <div class="toolbar">
+    <input id="q" type="search" placeholder="Tìm thẻ…" aria-label="Tìm thẻ">
+    <div class="chips" id="chips"></div>
+  </div>
+  <div id="days-root"></div>
+  <div class="empty" id="empty">Chưa có thẻ nào ở đây. Bấm “✅ Duyệt” trên một thẻ ở tab Chờ duyệt để đưa nó sang.</div>
+  <p class="note">Nguồn bản quyền Web Distill: 🟢 PD tuyệt đối · 🟡 PD nhưng bản dịch hiện đại còn hạn → kể lại bằng lời mình · 🔴 chỉ chưng cất ý tưởng. Trạng thái duyệt lưu trong trình duyệt (localStorage, khoá <code>htv-idea-crawl-approvals</code>), không đồng bộ sang máy khác. Cách gắn thêm một ngày: <a href="../docs/idea-crawl-update.md">docs/idea-crawl-update.md</a>.</p>
+</div>
+<script>
+var TR = {"game": ["🎮 Game", "#ff4d8d"], "distill": ["📚 Web Distill", "#7c5cff"], "fb": ["📣 FB pain→offer", "#ff9f1c"], "webapp": ["🤖 Webapp AI", "#00c2a8"]};
+// htvResearch: chỉ thêm/sửa ngày BÊN TRONG hai marker. Ngày mới nhất đứng đầu.
+// Không xoá ngày cũ. Xem docs/idea-crawl-update.md và scripts/merge-idea-day.js
+// IDEA-DAYS-START
+var IDEA_DAYS = [
+  {
+    "date": "2026-11-02",
+    "tz": "Asia/Saigon",
+    "label": "02/11",
+    "heading": "Thứ Hai, 02/11/2026",
+    "note": "Lượt đầu. Game 5 · Web Distill 5 · FB pain→offer 3 · Webapp AI 5. Mọi số liệu có link trong Chi tiết.",
+    "cards": [
+      {
+        "track": "game",
+        "title": "Đời Trọ Sài Gòn — mùng 5 chủ trọ gõ cửa",
+        "preview": "Remix Lagos Life: bạn mới lên phố, chọn nghề, mỗi mùng 5 phải đủ tiền trọ. Khởi đầu “con nhà có điều kiện” hay “vay app 7 ngày” — khoảng cách đó chính là trò chơi.",
+        "fields": [
+          [
+            "Mechanic gốc",
+            "\u003cb>Lagos Life\u003c/b> — game giả lập đời sống chạy trên trình duyệt (Nigeria, ra 1/10/2026): 25 nghề, tiền nhà đến hạn mỗi thứ Bảy, khởi đầu “Nepo” (con nhà giàu) hoặc “Lapo” (vay vi mô). 7 triệu người chơi trong 10 ngày, đỉnh hơn 200.000 người online cùng lúc (\u003ca href=\"https://guardian.ng/technology/inside-lagos-life-the-browser-game-building-a-virtual-nigerian-economy/\" target=\"_blank\" rel=\"noopener\">Guardian Nigeria 15/10/2026\u003c/a>); tác giả tự báo ~$46.900 doanh thu 4 ngày đầu — số tự báo, chưa kiểm chứng (\u003ca href=\"https://punchng.com/nigerian-game-recreating-everyday-lagos-life-goes-viral/\" target=\"_blank\" rel=\"noopener\">Punch 8/10/2026\u003c/a>). Nhãn hàng thật đã vào game (Chowdeck) — \u003ca href=\"https://x.com/marshalnosa/status/2108476047985688717\" target=\"_blank\" rel=\"noopener\">X @marshalnosa 9/10\u003c/a>."
+          ],
+          [
+            "Twist",
+            "Bản \u003cb>1 người chơi, không cần server\u003c/b> (tránh bài học Lagos Life bị lỗi in tiền — \u003ca href=\"https://businessday.ng/technology/article/lagos-life-crosses-1m-players-as-nigerian-built-browser-game-goes-viral/\" target=\"_blank\" rel=\"noopener\">BusinessDay 5/10/2026\u003c/a>). Bối cảnh trọ Sài Gòn/Đà Nẵng: nghề shipper, phụ quán, IT outsource, bán online; sự kiện điện 3.800đ/số, mưa ngập hẻm, bạn cùng phòng bỏ trốn, mẹ gửi thùng đồ quê. Hết game ra thẻ “Bạn trụ được 7 tháng, nợ 12 triệu, ăn 214 gói mì”."
+          ],
+          [
+            "Vai người chơi",
+            "Người trẻ mới lên phố thuê trọ, tự lo tiền nhà–tiền ăn–tiền gửi về quê."
+          ],
+          [
+            "Độ khó · thời gian",
+            "Trung bình · 6–8 buổi × 30’ (data tĩnh: nghề + sự kiện + giá; state lưu localStorage)."
+          ],
+          [
+            "Kênh · ra tiền",
+            "TikTok/Threads/group sinh viên (thẻ kết quả để khoe). Ads + slot “nhãn hàng trong game” (quán cơm, app giao đồ) nếu có traffic — học đúng cách Lagos Life gắn Chowdeck. Tiền: yếu–trung bình."
+          ]
+        ],
+        "score": null,
+        "star": false,
+        "id": "2026-11-02-c1"
+      },
+      {
+        "track": "game",
+        "title": "Ổ Gà Mùa Mưa — nuốt cả con phố",
+        "preview": "Remix Hole.io: bạn là một cái ổ gà, mưa càng to càng nuốt được đồ to — từ dép tổ ong tới xe ben. Đội vá đường đi tuần, bị vá là hết ván.",
+        "fields": [
+          [
+            "Mechanic gốc",
+            "\u003cb>Hole.io\u003c/b> (Voodoo, 2018): điều khiển cái hố, nuốt vật nhỏ để to dần, ván 2 phút. 100 triệu+ lượt tải trên Google Play, ước tính thực ~431 triệu (\u003ca href=\"https://playstoreradar.com/game/io.voodoo.holeio\" target=\"_blank\" rel=\"noopener\">PlayStore Radar\u003c/a>); bản thân nó vay ý tưởng của Donut County (\u003ca href=\"https://variety.com/2018/gaming/features/donut-county-hole-io-apple-1202866615/\" target=\"_blank\" rel=\"noopener\">Variety 2018\u003c/a>)."
+          ],
+          [
+            "Twist",
+            "Hố → \u003cb>ổ gà trên đường ven biển mùa mưa\u003c/b> (đoạn Đà Nẵng–Hội An “hễ mưa to là ngập” — \u003ca href=\"https://tienphong.vn/giai-cuu-doan-duong-ven-bien-da-nang-di-hoi-an-he-mua-to-la-ngap-post1888660.tpo\" target=\"_blank\" rel=\"noopener\">Tiền Phong 10/2026\u003c/a>). Thanh “mưa” tăng dần: mưa càng to ổ càng sâu. Nuốt nón lá → xe bánh mì → taxi → xe ben. Kẻ thù: đội vá đường cầm xô nhựa đường. Dùng phố hư cấu, giữ tông hài, không chỉ trích địa phương thật."
+          ],
+          [
+            "Vai người chơi",
+            "Chính cái ổ gà — phản diện đáng yêu của mọi tay lái mùa mưa."
+          ],
+          [
+            "Độ khó · thời gian",
+            "Thấp–trung bình · 3–4 buổi (2D nhìn từ trên xuống, canvas, va chạm hình tròn)."
+          ],
+          [
+            "Kênh · ra tiền",
+            "Clip TikTok “ổ gà nuốt cả xe ben”, đăng đúng tuần mưa to. Tiền: yếu, chỉ có ads."
+          ]
+        ],
+        "score": null,
+        "star": false,
+        "id": "2026-11-02-c2"
+      },
+      {
+        "track": "game",
+        "title": "Dọn Trọ 4 Năm Đại Học",
+        "preview": "Remix Unpacking: mỗi màn là một lần chuyển trọ, mở thùng xếp đồ. Không có chữ — câu chuyện kể bằng đồ vật, và thùng nào cũng có một chai nước mắm mẹ gửi.",
+        "fields": [
+          [
+            "Mechanic gốc",
+            "\u003cb>Unpacking\u003c/b> (Witch Beam, 2/11/2021): mở thùng, xếp đồ vào phòng, câu chuyện hiện ra qua đồ vật. 100.000 bản trong 10 ngày đầu, hơn 1 triệu bản sau 1 năm, đoạt BAFTA Game of the Year (\u003ca href=\"https://www.gamedeveloper.com/business/unpacking-has-topped-1-million-sales-in-one-year\" target=\"_blank\" rel=\"noopener\">Game Developer 2/11/2022\u003c/a>)."
+          ],
+          [
+            "Twist",
+            "Đời sinh viên Việt từ năm nhất tới lúc đi làm: ký túc xá 8 người → phòng trọ gác lửng → chung cư mini. Đồ quen mặt: nồi cơm điện, thùng mì tôm, quạt con cóc, ảnh người yêu cũ (phải giấu dưới gầm giường), và chai nước mắm quê ở MỌI thùng. Màn cuối: dọn đồ về quê ăn Tết."
+          ],
+          [
+            "Vai người chơi",
+            "Chính cậu/cô sinh viên đó, tự xếp lại 4 năm đời mình."
+          ],
+          [
+            "Độ khó · thời gian",
+            "Trung bình · 5–7 buổi (kéo thả theo lưới; asset pixel tạo bằng AI rồi sửa tay)."
+          ],
+          [
+            "Kênh · ra tiền",
+            "Threads/TikTok mảng hoài niệm, đúng mùa nhập học/tốt nghiệp. Tiền: yếu (ads); nếu hit thì làm bản dài bán $1–3."
+          ]
+        ],
+        "score": null,
+        "star": false,
+        "id": "2026-11-02-c3"
+      },
+      {
+        "track": "game",
+        "title": "Tam Sao Thất Bản Xóm Trọ",
+        "preview": "Remix Gartic Phone bản chơi một mình: bạn tung một tin đồn 6 chữ, 5 “bà hàng xóm AI” chuyền tay — tới cuối, “con bà Tư đậu đại học” thành “bị bắt vì buôn sầu riêng”.",
+        "fields": [
+          [
+            "Mechanic gốc",
+            "\u003cb>Gartic Phone\u003c/b> (Onrizon, 10/2020): trò “tam sao thất bản” bằng vẽ và đoán. Trung bình 19 triệu lượt truy cập/tháng, đỉnh hơn 240.000 người chơi cùng lúc (\u003ca href=\"https://onrizon.com/en/products/garticphone\" target=\"_blank\" rel=\"noopener\">Onrizon (nhà làm game)\u003c/a>); tháng 9/2026 có 10,11 triệu lượt truy cập, phiên trung bình 25 phút 45 giây (\u003ca href=\"https://www.semrush.com/website/garticphone.com/overview/\" target=\"_blank\" rel=\"noopener\">Semrush 9/2026\u003c/a>)."
+          ],
+          [
+            "Twist",
+            "Không cần gom đủ người: \u003cb>hàng xóm AI\u003c/b> mỗi người một tật (bà Tư nói quá, chú Ba thêm số liệu, cô Năm gắn vào drama showbiz). Bạn chọn từ ngữ để tin sống sót qua 5 lượt chuyền, hoặc chơi ngược: tung tin nhảm sao cho tới cuối thành tin thật. Có chế độ chuyền 1 máy (pass-and-play) cho nhóm bạn, không cần server."
+          ],
+          [
+            "Vai người chơi",
+            "Người tung tin đầu ngõ — rồi thành người đi đính chính."
+          ],
+          [
+            "Độ khó · thời gian",
+            "Thấp–trung bình · 3–5 buổi. Chi phí AI: LLM rẻ, giới hạn 1 ván/ngày; hoặc bảng biến đổi câu viết sẵn để không tốn API."
+          ],
+          [
+            "Kênh · ra tiền",
+            "Ảnh chụp chuỗi tin đồn tự thành meme trên Threads/Facebook. Tiền: yếu (ads)."
+          ]
+        ],
+        "score": null,
+        "star": false,
+        "id": "2026-11-02-c4"
+      },
+      {
+        "track": "game",
+        "title": "Shipper Sống Sót Giờ Tan Tầm",
+        "preview": "Remix Vampire Survivors: shipper chỉ việc lái, còi và đèn pha tự “bắn”; quái là xe lấn làn, khách bom hàng, ổ gà. Sống đủ 15 phút là xong ca.",
+        "fields": [
+          [
+            "Mechanic gốc",
+            "\u003cb>Vampire Survivors\u003c/b> (poncle): nhân vật tự tấn công, người chơi chỉ di chuyển và chọn nâng cấp giữa biển quái. Giá ~$3, đỉnh 77.061 người chơi cùng lúc trên Steam (2/2022 — \u003ca href=\"https://howitspread.com/cases/vampire-survivors\" target=\"_blank\" rel=\"noopener\">HowItSpread/SteamDB\u003c/a>), ~6 triệu bản trên Steam (\u003ca href=\"https://www.theguardian.com/games/2023/aug/04/baftas-video-game-vampire-survivors-luca-galante\" target=\"_blank\" rel=\"noopener\">The Guardian 8/2023\u003c/a>); giá rẻ biến game thành món mua bốc đồng (\u003ca href=\"https://howtomarketagame.com/2022/01/31/vampire-survivors-success-an-opportunity-in-the-steam-marketplace/\" target=\"_blank\" rel=\"noopener\">HowToMarketAGame\u003c/a>)."
+          ],
+          [
+            "Twist",
+            "Vòng xoay giờ tan tầm Việt Nam. “Vũ khí” tự bắn: còi, đèn pha, câu “alo em tới rồi”; nâng cấp: áo mưa 2 lớp, sạc dự phòng, bản đồ hẻm tắt, thùng giữ nhiệt. Trùm cuối: khách đổi địa chỉ phút chót."
+          ],
+          [
+            "Vai người chơi",
+            "Shipper ca chiều, phải giao đủ đơn trước khi điện thoại hết pin."
+          ],
+          [
+            "Độ khó · thời gian",
+            "Trung bình · 6–8 buổi (canvas, sinh quái theo đợt, cây nâng cấp)."
+          ],
+          [
+            "Kênh · ra tiền",
+            "TikTok + group shipper/tài xế. Ads; nếu hit thì đưa lên Steam giá $1,99 như cách định giá rẻ của bản gốc."
+          ]
+        ],
+        "score": null,
+        "star": false,
+        "id": "2026-11-02-c5"
+      },
+      {
+        "track": "distill",
+        "title": "Ảo tưởng đám đông (Mackay 1841) × bong bóng crypto & meme 2026",
+        "preview": "Hoa tulip 1637, bong bóng South Sea 1720 — 180 năm trước đã có đủ FOMO, “lùa gà”, “lần này khác”. Mỗi cơn sốt xưa đặt cạnh một cơn sốt hôm nay.",
+        "fields": [
+          [
+            "Hook",
+            "Bạn đang ở giai đoạn nào của bong bóng? Mackay đã ghi lại hết từ năm 1841."
+          ],
+          [
+            "Nguồn gốc · bản quyền",
+            "🟢 PD tuyệt đối — Charles Mackay 1841 (\u003ca href=\"https://www.gutenberg.org/ebooks/24518\" target=\"_blank\" rel=\"noopener\">Gutenberg #24518\u003c/a>; \u003ca href=\"https://en.wikipedia.org/wiki/Extraordinary_Popular_Delusions_and_the_Madness_of_Crowds\" target=\"_blank\" rel=\"noopener\">Wikipedia\u003c/a>). Chỉ dẫn lại sự kiện cũ; phần 2026 viết bằng lời mình, có nguồn."
+          ],
+          [
+            "Format chính",
+            "DB 20+ cơn sốt (timeline + 5 giai đoạn bong bóng) + cột đối chiếu xưa ↔ nay + quiz “năm 1720 bạn là kiểu nhà đầu tư nào”."
+          ],
+          [
+            "Ra tiền",
+            "Ads mảng tài chính (RPM cao) · affiliate sách đầu tư/tâm lý đám đông · POD poster “Tulip Mania”. Không gắn link sàn crypto, không tư vấn đầu tư."
+          ]
+        ],
+        "score": 5,
+        "star": false,
+        "id": "2026-11-02-c6"
+      },
+      {
+        "track": "distill",
+        "title": "Darwin — Biểu hiện cảm xúc (1872) × emoji & sticker",
+        "preview": "Sách năm 1872 của Darwin dùng ảnh chụp gương mặt người để bàn về cảm xúc — web cho bạn đoán lại các gương mặt ấy rồi đặt cạnh emoji hôm nay: 150 năm sau, ta có đọc mặt giỏi hơn không?",
+        "fields": [
+          [
+            "Hook",
+            "Bộ “sticker cảm xúc” đầu tiên trong lịch sử là của Darwin."
+          ],
+          [
+            "Nguồn gốc · bản quyền",
+            "🟢 PD tuyệt đối — sách và ảnh minh hoạ thế kỷ 19 (\u003ca href=\"https://www.gutenberg.org/ebooks/1227\" target=\"_blank\" rel=\"noopener\">Gutenberg #1227\u003c/a>; \u003ca href=\"https://en.wikipedia.org/wiki/The_Expression_of_the_Emotions_in_Man_and_Animals\" target=\"_blank\" rel=\"noopener\">Wikipedia\u003c/a>)."
+          ],
+          [
+            "Format chính",
+            "Lab “đoán cảm xúc qua ảnh 1872” → % người đoán giống bạn + DB cảm xúc ↔ cơ mặt ↔ emoji + flashcard đọc vị gương mặt."
+          ],
+          [
+            "Ra tiền",
+            "Ads · affiliate sách tâm lý/EQ · POD bộ sticker “Darwin mood” (in vinyl hoặc file sticker Zalo/Telegram)."
+          ]
+        ],
+        "score": 4,
+        "star": false,
+        "id": "2026-11-02-c7"
+      },
+      {
+        "track": "distill",
+        "title": "Lĩnh Nam chích quái × Pokédex quái vật Việt",
+        "preview": "Ngư Tinh, Hồ Tinh, Mộc Tinh — Việt Nam có sẵn “bộ quái vật” từ thế kỷ 15. Mỗi con một thẻ chỉ số, nơi trú trên bản đồ, ai đã hạ nó.",
+        "fields": [
+          [
+            "Hook",
+            "Trước Pokémon 500 năm, người Việt đã có sách ghi chép quái vật."
+          ],
+          [
+            "Nguồn gốc · bản quyền",
+            "🟡 Nguyên tác Hán văn biên soạn cuối thế kỷ 15 → PD (\u003ca href=\"https://vi.wikipedia.org/wiki/L%C4%A9nh_Nam_ch%C3%ADch_qu%C3%A1i\" target=\"_blank\" rel=\"noopener\">Wikipedia: Lĩnh Nam chích quái\u003c/a>). Bản dịch quốc ngữ hiện đại có thể còn bản quyền → tự kể lại bằng lời mình, không chép bản dịch."
+          ],
+          [
+            "Format chính",
+            "DB/thẻ quái (chỉ số, điểm yếu, truyền thuyết 3 dòng) + bản đồ theo tỉnh + quiz “bạn là thần hay quái nào”."
+          ],
+          [
+            "Ra tiền",
+            "Affiliate sách truyện cổ (Fahasa/Tiki/Shopee) · POD sticker và bộ thẻ bài quái Việt · ads VN."
+          ]
+        ],
+        "score": 4,
+        "star": false,
+        "id": "2026-11-02-c8"
+      },
+      {
+        "track": "distill",
+        "title": "24 tiết khí × lịch trồng rau ban công 2026–27",
+        "preview": "Lập Đông (khoảng 7/11), Tiểu Tuyết, Đại Tuyết… lịch nông 2.000 năm tuổi thành lịch “tuần này gieo gì trên ban công 3m²” cho dân chung cư ba miền.",
+        "fields": [
+          [
+            "Hook",
+            "Ông bà xem tiết khí để cày ruộng; bạn xem để trồng rau muống trong thùng xốp."
+          ],
+          [
+            "Nguồn gốc · bản quyền",
+            "🟢 Tri thức truyền thống, không có bản quyền; dữ kiện lấy từ \u003ca href=\"https://vi.wikipedia.org/wiki/Ti%E1%BA%BFt_kh%C3%AD\" target=\"_blank\" rel=\"noopener\">Wikipedia: Tiết khí\u003c/a> (CC BY-SA, ghi nguồn)."
+          ],
+          [
+            "Format chính",
+            "Lịch tương tác 24 tiết (ngày dương 2026–27) + DB cây theo miền Bắc/Trung/Nam + email nhắc mỗi tiết khí (15 ngày/lần)."
+          ],
+          [
+            "Ra tiền",
+            "Affiliate hạt giống/đất/chậu (mua lặp lại) · POD lịch treo tường 24 tiết khí (bán mạnh dịp Tết) · ads."
+          ]
+        ],
+        "score": 4,
+        "star": false,
+        "id": "2026-11-02-c9"
+      },
+      {
+        "track": "distill",
+        "title": "Haeckel — Kunstformen der Natur (1904) × hoạ tiết in áo/gốm",
+        "preview": "100 bản in sinh vật biển đẹp như hoa văn. Chọn một con sứa hay tảo silic, web xoay thành hoạ tiết lặp để in áo, khăn, ốp lưng.",
+        "fields": [
+          [
+            "Hook",
+            "Hoạ tiết đẹp nhất thế giới được vẽ bởi một nhà sinh vật học năm 1904."
+          ],
+          [
+            "Nguồn gốc · bản quyền",
+            "🟢 PD — Ernst Haeckel (mất 1919), 100 bản in 1899–1904 (\u003ca href=\"https://en.wikipedia.org/wiki/Kunstformen_der_Natur\" target=\"_blank\" rel=\"noopener\">Wikipedia: Kunstformen der Natur\u003c/a>); bản scan trên Wikimedia Commons ở dạng PD."
+          ],
+          [
+            "Format chính",
+            "Thư viện 100 bản in theo loài + lab “tạo hoạ tiết” (đối xứng, lặp, đổi màu) + 3 dòng giải thích sinh học mỗi loài."
+          ],
+          [
+            "Ra tiền",
+            "POD (áo, khăn, ốp lưng) là nguồn chính · bán file hoạ tiết số · affiliate sách sinh học/tranh."
+          ]
+        ],
+        "score": 4,
+        "star": false,
+        "id": "2026-11-02-c10"
+      },
+      {
+        "track": "fb",
+        "title": "Sổ doanh thu nói miệng — cho tiểu thương sợ ghi sai",
+        "preview": "Cuối ngày chỉ cần nói “hôm nay bán 42 tô, chuyển khoản 1 triệu 2” → app ghi vào sổ doanh thu đúng mẫu, cuối quý xuất ra con số để tự khai. Dành cho người “học hết lớp 3, không dám viết, sợ sai”.",
+        "fields": [
+          [
+            "Vấn đề (người dân than công khai)",
+            "Thanh Niên: bà Muội chợ An Đông “Chi hơn 3,6 triệu đồng mua máy kê khai tính tiền rồi… để đó, vì không làm được”; chủ quán cơm: “riêng giấy hằng ngày cũng hết cả chục trang” (\u003ca href=\"https://thanhnien.vn/ho-kinh-doanh-roi-voi-ghi-chep-thu-chi-185260111182733627.htm\" target=\"_blank\" rel=\"noopener\">Thanh Niên 12/01/2026\u003c/a>). VnExpress: chị Lan bán trứng “lo chỉ một lỗi kỹ thuật cũng có thể dẫn tới mức phạt hàng chục triệu đồng” (\u003ca href=\"https://vnexpress.net/tieu-thuong-lo-dong-phat-ke-khai-thue-sai-5003757.html\" target=\"_blank\" rel=\"noopener\">VnExpress 01/2026\u003c/a>)."
+          ],
+          [
+            "Tín hiệu Facebook công khai",
+            "Nhóm công khai \u003ca href=\"https://www.facebook.com/groups/hokinhdoanh/posts/4215046152043847/\" target=\"_blank\" rel=\"noopener\">FB nhóm “KẾ TOÁN HỘ KINH DOANH”\u003c/a> vẫn đăng bài hướng dẫn kê khai; \u003ca href=\"https://www.facebook.com/ihoadon/posts/5-vi%E1%BB%87c-h%E1%BB%99-kinh-doanh-c%C3%B3-doanh-thu-d%C6%B0%E1%BB%9Bi-500-tri%E1%BB%87u-c%E1%BA%A7n-ph%E1%BA%A3i-l%C3%A0m-%C4%91%E1%BB%A7-h%E1%BA%A1n-3172026-%C4%91%E1%BB%ABn/1229586525958305/\" target=\"_blank\" rel=\"noopener\">FB page Hóa đơn điện tử EFY\u003c/a> nhắc hộ có doanh thu dưới 500 triệu vẫn phải khai trước 31/1/2027 → sắp tới mùa cao điểm."
+          ],
+          [
+            "Offer sản phẩm",
+            "Web app 1 nút micro hoặc chụp ảnh trang sổ tay → AI ghi vào sổ doanh thu (mẫu S1a-HKD), tách tiền mặt/chuyển khoản → cuối quý xuất Excel/PDF + con số để người dùng tự điền tờ khai 01/CNKD trên eTax (app không khai hộ, không tư vấn thuế). Giá 39k/tháng hoặc 299k/năm."
+          ],
+          [
+            "Khác thẻ cũ",
+            "“Lịch thuế nhắc việc” (webapp #16) chỉ nhắc hạn; thẻ này làm luôn phần ghi sổ hằng ngày bằng giọng nói cho người lớn tuổi."
+          ],
+          [
+            "Rủi ro",
+            "MISA, KiotViet và ngân hàng đều có sổ miễn phí → phải thắng bằng giọng nói, chữ to, giá rẻ. Mẫu sổ phải đối chiếu lại Thông tư 152 trước khi build."
+          ]
+        ],
+        "score": 8.6,
+        "star": false,
+        "id": "2026-11-02-c11"
+      },
+      {
+        "track": "fb",
+        "title": "Máy tính thuế hộ kinh doanh 2026 — đã trừ 30% theo NĐ 398",
+        "preview": "Chính sách giảm 30% thuế thu nhập vừa có hiệu lực, “hai cách hiểu” đang lan khắp mạng. Trả lời 4 câu → biết mình thuộc nhóm nào, kỳ khai nào, thuế trước/sau giảm, hạn kế tiếp.",
+        "fields": [
+          [
+            "Vấn đề (than công khai)",
+            "“Cùng một chính sách, hai cách hiểu — và hàng triệu hộ kinh doanh đang hiểu sai chỗ quan trọng nhất” (\u003ca href=\"https://x.com/hoatanhoano/status/2116353914518007930\" target=\"_blank\" rel=\"noopener\">X @hoatanhoano 31/10\u003c/a>, 11 trả lời); “Nghị định 398 đã có hiệu lực từ 29/10. Giảm ngay khi kê khai từng kỳ” (\u003ca href=\"https://x.com/cozy_xvn/status/2116523890759610488\" target=\"_blank\" rel=\"noopener\">X @cozy_xvn 31/10\u003c/a>, 9 trả lời; \u003ca href=\"https://x.com/trithucvn/status/2116471754453627244\" target=\"_blank\" rel=\"noopener\">X @trithucvn 31/10\u003c/a>). Thanh Niên: nhiều hộ “không biết mình thuộc nhóm nào” (\u003ca href=\"https://thanhnien.vn/ho-kinh-doanh-roi-voi-ghi-chep-thu-chi-185260111182733627.htm\" target=\"_blank\" rel=\"noopener\">Thanh Niên 12/01/2026\u003c/a>)."
+          ],
+          [
+            "Offer sản phẩm",
+            "Trang miễn phí kiểu mỗi màn 1 câu hỏi: ngành nghề, doanh thu dự kiến, bán qua sàn (đã bị khấu trừ chưa) → ra nhóm, kỳ khai, số thuế ước tính trước/sau giảm 30%, hạn nộp tiếp theo + PDF tóm tắt. Đây là cửa thu khách → bán thêm “Sổ doanh thu nói miệng” + gói nhắc hạn 19k/tháng."
+          ],
+          [
+            "Rủi ro",
+            "BẮT BUỘC đọc văn bản gốc NĐ 398 trước khi build (bằng chứng hiện mới từ bài đăng X và tin tổng hợp); ghi rõ “ước tính, không thay tư vấn thuế”."
+          ]
+        ],
+        "score": 8.2,
+        "star": false,
+        "id": "2026-11-02-c12"
+      },
+      {
+        "track": "fb",
+        "title": "Thẻ “Cán bộ thuế thật hay giả?” dán quầy",
+        "preview": "Kẻ gian giả cán bộ thuế, dụ cài app “hỗ trợ kê khai” rồi rút sạch tài khoản. Bộ thẻ A5 + mã QR dán quầy: 5 câu hỏi trong 30 giây trước khi bấm bất kỳ link nào.",
+        "fields": [
+          [
+            "Vấn đề",
+            "Chủ tiệm vàng ở Thanh Hóa mất 312.000.000đ sau khi làm theo “cán bộ thuế” vào trang giả; công an khuyến cáo: ngành Thuế KHÔNG gọi qua Zalo để cài app (\u003ca href=\"https://conganthanhhoa.gov.vn/tin-tuc-su-kien/tin-an-ninh-trat-tu/canh-giac-thu-doan-danh-cap-tien-trong-tai-khoan-ngan-hang-thong-qua-lua-dao-ho-tro-ke-khai-thue-.html\" target=\"_blank\" rel=\"noopener\">Công an Thanh Hóa 04/05/2026\u003c/a>); cảnh báo tương tự vẫn tiếp tục (\u003ca href=\"https://diendanphapluat.nguoiduatin.vn/canh-bao-lua-dao-qua-cac-cuoc-goi-gia-danh-can-bo-thue-a50057.html\" target=\"_blank\" rel=\"noopener\">Người Đưa Tin\u003c/a>)."
+          ],
+          [
+            "Offer sản phẩm",
+            "Gói in sẵn: thẻ A5 + sticker QR → trang web 1 màn hình (đối chiếu tên miền với gdt.gov.vn, 5 dấu hiệu lừa, số tổng đài chính thống). Giá 49k/bộ tải về cho hộ lẻ; 990k gói in 100 bản cho ban quản lý chợ/hội tiểu thương. Dùng như mồi miễn phí cho thẻ “Sổ doanh thu”."
+          ],
+          [
+            "Rủi ro",
+            "Tiền yếu nếu bán riêng lẻ, giá trị chính là kéo khách; mọi khuyến cáo phải trích từ nguồn chính thống."
+          ]
+        ],
+        "score": 6.8,
+        "star": false,
+        "id": "2026-11-02-c13"
+      },
+      {
+        "track": "webapp",
+        "title": "Phiếu xếp loại viên chức cuối năm theo NĐ 233/2026 — xong trong 5 phút",
+        "preview": "Mẫu phiếu mới áp dụng từ 1/7/2026, phải xếp loại trước 15/12. Gõ gạch đầu dòng việc đã làm → AI viết ưu điểm/hạn chế đúng khung 30 + 70 điểm → tải về .docx đúng mẫu Phụ lục II.",
+        "fields": [
+          [
+            "Tệp user",
+            "Viên chức đơn vị sự nghiệp công lập (y tế, văn hoá, sự nghiệp…); tổ trưởng làm cho cả tổ. Lưu ý: giáo dục xếp loại theo hướng dẫn riêng của Bộ GD&ĐT → bản đầu bỏ qua mảng giáo dục."
+          ],
+          [
+            "Nỗi đau + nguồn",
+            "NĐ 233/2026/NĐ-CP ban hành 26/6/2026, mẫu phiếu ở Phụ lục II, xếp loại trước 15/12 hằng năm; ≥90 điểm = xuất sắc, 70–\u003c90 = tốt (tối đa 20% số “tốt” được xuất sắc) (\u003ca href=\"https://thuvienphapluat.vn/chinh-sach-phap-luat-moi/vn/bieu-mau/116419/mau-phieu-xep-loai-chat-luong-vien-chuc-nam-2026-theo-nghi-dinh-233-2026-nd-cp\" target=\"_blank\" rel=\"noopener\">Thư Viện Pháp Luật 03/07/2026\u003c/a>). Mẫu mới nên ai cũng đang lúng túng; các trang mẫu chỉ có file Word trống."
+          ],
+          [
+            "Form → AI → file",
+            "Chọn vị trí việc làm + 5–10 gạch đầu dòng + số liệu (số ca, số hồ sơ…) → AI viết phần tự nhận xét đúng tiêu chí, tự cộng điểm, gợi ý mức xếp loại → xuất .docx đúng mẫu."
+          ],
+          [
+            "Ra tiền",
+            "29k/phiếu · 79k gói 5 phiếu. Bán ~300 phiếu ≈ 8,7 triệu ≈ $330 trong mùa (tháng 11–12)."
+          ],
+          [
+            "Độ khó · cạnh tranh · thời gian",
+            "Dễ · Thấp–TB · tự phục vụ, ≤30’/ngày (chỉ xem log lỗi). Bán theo mùa → tận dụng lại đúng bộ khung form→docx cho thẻ Rirekisho."
+          ]
+        ],
+        "score": 9.1,
+        "star": true,
+        "id": "2026-11-02-c14"
+      },
+      {
+        "track": "webapp",
+        "title": "Rirekisho & 職務経歴書 từ form tiếng Việt",
+        "preview": "Điền bằng tiếng Việt → nhận CV Nhật đúng chuẩn: kính ngữ, đổi năm 和暦/西暦, khổ A4 chuẩn JIS, ô dán ảnh 3×4. Cho người đi Nhật lần đầu hoặc đổi việc diện tokutei.",
+        "fields": [
+          [
+            "Tệp user",
+            "605.906 lao động Việt tại Nhật (cuối 10/2025), đông nhất trong các nước, chiếm 23,6% lao động nước ngoài (\u003ca href=\"https://www.mhlw.go.jp/content/11655000/001646131.pdf\" target=\"_blank\" rel=\"noopener\">MHLW Nhật (10/2025)\u003c/a>; \u003ca href=\"https://www.nippon.com/ja/articles/-/10386\" target=\"_blank\" rel=\"noopener\">nippon.com\u003c/a>) + người đang học tiếng chuẩn bị đi."
+          ],
+          [
+            "Nỗi đau",
+            "Viết CV tiếng Nhật đúng thể thức rất khó với người mới học tiếng; hiện phải nhờ trung tâm hoặc dùng tool tiếng Nhật thuần."
+          ],
+          [
+            "Form → AI → file",
+            "Form tiếng Việt (học vấn, việc làm, JLPT, kỹ năng, lý do ứng tuyển) → AI viết tiếng Nhật kính ngữ, quy đổi năm → PDF/Excel đúng khổ + bản dịch đối chiếu tiếng Việt để tự kiểm tra."
+          ],
+          [
+            "Ra tiền",
+            "59k/bộ · 149k gói 3 lần sửa. Kênh: group Facebook cộng đồng người Việt tại Nhật, SEO “rirekisho tiếng Việt”."
+          ],
+          [
+            "Độ khó · cạnh tranh",
+            "Dễ–TB · Thấp (tool Nhật miễn phí nhưng giao diện tiếng Nhật). Tự phục vụ, không làm thuê từng bộ."
+          ]
+        ],
+        "score": 8.8,
+        "star": false,
+        "id": "2026-11-02-c15"
+      },
+      {
+        "track": "webapp",
+        "title": "Lịch trình + checklist visa Nhật tự túc",
+        "preview": "Nhập ngày bay, thành phố, khách sạn → ra bảng lịch trình lưu trú ghi từng ngày đúng yêu cầu ĐSQ (địa chỉ, SĐT nơi ở), tự soát khớp ngày với booking + checklist giấy tờ theo nghề.",
+        "fields": [
+          [
+            "Tệp user",
+            "Người Việt xin visa du lịch Nhật lần đầu, tự làm hồ sơ không qua đại lý."
+          ],
+          [
+            "Nỗi đau + nguồn",
+            "ĐSQ yêu cầu lịch trình ghi từng ngày, nơi ở kèm địa chỉ và số điện thoại (\u003ca href=\"https://www.vn.emb-japan.go.jp/itpr_ja/VN_SVisaTOUR.html\" target=\"_blank\" rel=\"noopener\">ĐSQ Nhật tại VN\u003c/a>; \u003ca href=\"https://www.hcmcgj.vn.emb-japan.go.jp/itpr_vi/visa_dulich_tutuc.html\" target=\"_blank\" rel=\"noopener\">TLSQ Nhật tại TP.HCM\u003c/a>); lý do trượt hay gặp là lịch trình sơ sài/không khớp booking, thông tin mâu thuẫn (\u003ca href=\"https://visaviettin.vn/ly-do-bi-tu-choi-visa-nhat-ban-2026-pho-bien-nhat-va-cach-khac-phuc-hieu-qua/\" target=\"_blank\" rel=\"noopener\">Visa Viettin\u003c/a>)."
+          ],
+          [
+            "Form → AI → file",
+            "Form → AI dựng bảng lịch trình (滞在予定表) + cảnh báo ngày lệch + checklist theo nghề (nhân viên/tự do/hưu trí) → PDF/Excel."
+          ],
+          [
+            "Ra tiền",
+            "49k/hồ sơ; sau mở rộng Hàn Quốc/Schengen. Ghi rõ “không cam kết đậu”."
+          ],
+          [
+            "Độ khó · cạnh tranh",
+            "Dễ · Trung bình (đại lý visa, blog hướng dẫn miễn phí)."
+          ]
+        ],
+        "score": 8.4,
+        "star": false,
+        "id": "2026-11-02-c16"
+      },
+      {
+        "track": "webapp",
+        "title": "Thực đơn tuần cho nhóm trẻ tư thục — đạt chuẩn kcal",
+        "preview": "Nhập sĩ số, độ tuổi, tiền ăn mỗi suất → ra thực đơn 5 ngày đạt chuẩn năng lượng, danh sách đi chợ theo gram và bảng thực đơn đẹp để gửi Zalo phụ huynh.",
+        "fields": [
+          [
+            "Tệp user",
+            "Chủ nhóm trẻ/lớp mầm non tư thục nhỏ — trường công thường đã có phần mềm, nhóm nhỏ vẫn tự làm Excel."
+          ],
+          [
+            "Nỗi đau + nguồn",
+            "Chuẩn mẫu giáo tại trường 615–726 kcal/ngày, có tỉ lệ đạm/béo/bột đường riêng (\u003ca href=\"https://luatvietnam.vn/giao-duc/thong-tu-28-2016-tt-bgddt-bo-giao-duc-va-dao-tao-111705-d1.html\" target=\"_blank\" rel=\"noopener\">TT 28/2016/TT-BGDĐT\u003c/a>; \u003ca href=\"http://tytphuongtambinh.medinet.gov.vn/cham-soc-suc-khoe-tre-em/cach-tinh-khau-phan-an-cho-tre-mam-non-day-du-dinh-duong-c11045-127741.aspx\" target=\"_blank\" rel=\"noopener\">Trạm Y tế P. Tam Bình\u003c/a>); trường lớn dùng phần mềm như \u003ca href=\"http://app.viettechkey.com/tai-lieu-huong-dan-su-dung-phan-mem-tinh-khau-phan-an-vtk-3-0\" target=\"_blank\" rel=\"noopener\">phần mềm VTK 3.0\u003c/a>."
+          ],
+          [
+            "Form → AI → file",
+            "Form → thực đơn tuần, số liệu dinh dưỡng tra từ bảng thành phần thực phẩm Việt Nam (KHÔNG để AI tự đoán kcal) → PDF/ảnh thực đơn + danh sách đi chợ."
+          ],
+          [
+            "Ra tiền",
+            "99k/tháng/nhóm lớp."
+          ],
+          [
+            "Độ khó · cạnh tranh",
+            "Trung bình (phải có dữ liệu dinh dưỡng chuẩn) · Thấp–TB ở phân khúc nhóm nhỏ."
+          ]
+        ],
+        "score": 8,
+        "star": false,
+        "id": "2026-11-02-c17"
+      },
+      {
+        "track": "webapp",
+        "title": "Bài phát biểu đại diện hai họ — 3 phút, đúng vai, đúng giọng",
+        "preview": "Được nhờ phát biểu đám cưới mùa cưới cuối năm? Điền vai, tên cô dâu chú rể, 2 kỷ niệm, giọng vùng miền → ra bài 2–3 phút + bản in chữ to + thời lượng đọc.",
+        "fields": [
+          [
+            "Tệp user",
+            "Bố mẹ, cô chú, anh cả được nhờ phát biểu đại diện họ nhà trai/nhà gái."
+          ],
+          [
+            "Tín hiệu",
+            "Nhiều trang đua nhau đăng “mẫu phát biểu 2026” (\u003ca href=\"https://tiff.vn/bai-phat-bieu-dam-cuoi-nha-gai/\" target=\"_blank\" rel=\"noopener\">tiff.vn\u003c/a>; \u003ca href=\"https://hoatieu.vn/tai-lieu/mau-bai-phat-bieu-dai-dien-ho-nha-gai-215244\" target=\"_blank\" rel=\"noopener\">HoaTieu.vn\u003c/a>) → có người tìm thật, nhưng mẫu nào cũng chung chung."
+          ],
+          [
+            "Form → AI → file",
+            "Form → bài cá nhân hoá + bản in A4 chữ to + bản rút gọn 1 phút."
+          ],
+          [
+            "Ra tiền",
+            "29k/bài."
+          ],
+          [
+            "Độ khó · cạnh tranh",
+            "Rất dễ · Cao (mẫu miễn phí + ChatGPT) → điểm thấp nhất nhóm."
+          ]
+        ],
+        "score": 7.3,
+        "star": false,
+        "id": "2026-11-02-c18"
+      }
+    ]
+  }
+];
+// IDEA-DAYS-END
+var KEY = 'htv-idea-crawl-approvals';
+var st = {};
+try { st = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { st = {}; }
+var tab = 'wait';
+var tr = 'all';
+
+function escapeText(s) {
+  return String(s || '').replace(/[&<>"']/g, function (ch) {
+    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+  });
+}
+function stars(n) {
+  n = Math.max(0, Math.min(5, n | 0));
+  return '★'.repeat(n) + '☆'.repeat(5 - n);
+}
+function scoreTxt(c) {
+  if (c.score == null) return '';
+  if (c.track === 'distill') return stars(c.score);
+  return String(c.score).replace('.', ',') + '/10';
+}
+function plain(html) {
+  return String(html || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').toLowerCase();
+}
+function save() {
+  try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {}
+}
+function cardEl(day, c) {
+  var t = TR[c.track] || [c.track, '#888'];
+  var ok = !!st[c.id];
+  var el = document.createElement('article');
+  el.className = 'card' + (c.star ? ' star' : '');
+  el.style.setProperty('--c', t[1]);
+  el.dataset.id = c.id;
+  var fields = (c.fields || []).map(function (f) {
+    return '<dt>' + escapeText(f[0]) + '</dt><dd>' + f[1] + '</dd>';
+  }).join('');
+  el.innerHTML =
+    '<div class="top"><span class="tchip">' + t[0] + '</span><span class="score">' + escapeText(scoreTxt(c)) + '</span></div>' +
+    '<h3>' + escapeText(c.title) + (c.star ? '<span class="badge">⭐ LÀM NGAY</span>' : '') + '</h3>' +
+    '<div class="prev">' + escapeText(c.preview) + '</div>' +
+    '<div class="meta-row"><span class="date-badge">' + escapeText(day.label) + '</span></div>' +
+    '<details><summary>Chi tiết</summary><dl>' + fields + '</dl></details>' +
+    '<div class="foot"><button type="button" class="btn ' + (ok ? '' : 'ok') + '" data-id="' + escapeText(c.id) + '">' +
+      (ok ? '↩ Trả về Chờ duyệt' : '✅ Duyệt') + '</button></div>';
+  return el;
+}
+function renderNav() {
+  var nav = document.getElementById('days');
+  nav.innerHTML = '<b>Các ngày:</b>';
+  IDEA_DAYS.forEach(function (d, i) {
+    var a = document.createElement('a');
+    a.href = '#d' + d.date;
+    a.textContent = d.label + ' · ' + d.cards.length;
+    if (!location.hash && i === 0) a.className = 'on';
+    if (location.hash === '#d' + d.date) a.className = 'on';
+    nav.appendChild(a);
+  });
+}
+function renderStats() {
+  var counts = {};
+  var n = 0;
+  IDEA_DAYS.forEach(function (d) {
+    d.cards.forEach(function (c) {
+      n++;
+      counts[c.track] = (counts[c.track] || 0) + 1;
+    });
+  });
+  var html = '<div class="stat"><b>' + n + '</b> thẻ</div><div class="stat"><b>' + IDEA_DAYS.length + '</b> ngày</div>';
+  Object.keys(TR).forEach(function (k) {
+    html += '<div class="stat" style="border-left:5px solid ' + TR[k][1] + '"><b>' + (counts[k] || 0) + '</b> ' + TR[k][0] + '</div>';
+  });
+  document.getElementById('stats').innerHTML = html;
+}
+function renderChips() {
+  var ch = document.getElementById('chips');
+  [['all', 'Tất cả']].concat(Object.keys(TR).map(function (k) { return [k, TR[k][0]]; })).forEach(function (p, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip' + (i ? '' : ' on');
+    b.textContent = p[1];
+    if (i) b.style.background = TR[p[0]][1] + '22';
+    b.onclick = function () {
+      tr = p[0];
+      [].forEach.call(ch.children, function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      render();
+    };
+    ch.appendChild(b);
+  });
+}
+function render() {
+  var q = document.getElementById('q').value.toLowerCase().trim();
+  var root = document.getElementById('days-root');
+  root.innerHTML = '';
+  var shown = 0, nw = 0, no = 0;
+  IDEA_DAYS.forEach(function (day) {
+    var sec = document.createElement('section');
+    sec.className = 'day';
+    sec.id = 'd' + day.date;
+    var head = document.createElement('div');
+    head.className = 'day-head';
+    head.innerHTML = '<h2>' + escapeText(day.heading) + '</h2><p class="meta">' +
+      escapeText(day.note || '') + ' · ' + day.cards.length + ' thẻ · ' + escapeText(day.tz || 'Asia/Saigon') + '</p>';
+    sec.appendChild(head);
+    var grid = document.createElement('div');
+    grid.className = 'grid';
+    var n = 0;
+    day.cards.forEach(function (c) {
+      var approved = !!st[c.id];
+      var trackOk = (tr === 'all' || c.track === tr);
+      var blob = plain([c.title, c.preview].concat((c.fields || []).map(function (f) { return f[0] + ' ' + f[1]; })).join(' '));
+      var searchOk = !q || blob.indexOf(q) >= 0;
+      if (trackOk && searchOk) { if (approved) no++; else nw++; }
+      if (!trackOk || !searchOk || (tab === 'ok') !== approved) return;
+      grid.appendChild(cardEl(day, c));
+      n++;
+      shown++;
+    });
+    if (!n) return;
+    sec.appendChild(grid);
+    root.appendChild(sec);
+  });
+  document.getElementById('nw').textContent = nw;
+  document.getElementById('no').textContent = no;
+  var empty = document.getElementById('empty');
+  if (shown) empty.style.display = 'none';
+  else {
+    empty.style.display = 'block';
+    empty.textContent = tab === 'ok'
+      ? 'Chưa có thẻ nào ở đây. Bấm “✅ Duyệt” trên một thẻ ở tab Chờ duyệt để đưa nó sang.'
+      : 'Không có thẻ khớp bộ lọc.';
+  }
+}
+document.querySelectorAll('.tab').forEach(function (t) {
+  t.onclick = function () {
+    tab = t.dataset.tab;
+    document.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('on', x === t); });
+    render();
+  };
+});
+document.getElementById('q').oninput = render;
+document.getElementById('days-root').addEventListener('click', function (e) {
+  var b = e.target.closest('.btn');
+  if (!b) return;
+  var id = b.dataset.id;
+  if (st[id]) delete st[id]; else st[id] = 1;
+  save();
+  render();
+});
+window.addEventListener('hashchange', renderNav);
+renderStats();
+renderNav();
+renderChips();
+render();
+</script>
+</body>
+</html>
