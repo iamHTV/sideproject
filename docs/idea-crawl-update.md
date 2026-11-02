@@ -1,27 +1,30 @@
-# Cập nhật kho thẻ Idea Crawl
+# Gắn thẻ idea vào từng dashboard
 
-Kho nằm ở `dashboard/idea-crawl.html`. Đây là bản **cộng dồn**: mỗi ngày thêm thẻ mới, mọi ngày cũ vẫn còn. Không thay cả file bằng HTML của một ngày.
+Mỗi ngày (lịch **Asia/Saigon**) thêm 3–5 thẻ cho từng mảng vào **đúng file dashboard**. Bốn kho giữ schema và tab sẵn có. Không gộp về một file.
 
-Trang công khai (sau khi bật GitHub Pages từ nhánh `main`, thư mục `/`):
+| Mảng | File | Chỗ thẻ mới xuất hiện |
+| --- | --- | --- |
+| `game` | `dashboard/game.html` | Đầu mảng `IDEAS` (mục idea chờ duyệt) |
+| `distill` | `dashboard/web-distill.html` | Đầu lưới, ngay dưới marker `BATCH_MOI` |
+| `fb` | `dashboard/quet-facebook.html` | Ngày mới trên cùng (nav, thẻ nhìn nhanh, section) |
+| `webapp` | `dashboard/webapp-ai.html` | Đầu `#idea-grid` (sắp xếp mặc định “Mới nhất trước”) |
 
-- Kho tổng: https://iamhtv.github.io/sideproject/
-- Kho thẻ: https://iamhtv.github.io/sideproject/dashboard/idea-crawl.html
+Substack không nhận thẻ idea này.
 
-Ngày tính theo lịch **Asia/Saigon**.
+Trang công khai (GitHub Pages, nhánh `main`, thư mục `/`):
 
-## Nguồn dữ liệu duy nhất
+- Kho Tổng: https://iamhtv.github.io/sideproject/
+- Game: https://iamhtv.github.io/sideproject/dashboard/game.html
+- Substack: https://iamhtv.github.io/sideproject/dashboard/substack-iamhtv.html
+- Web Distill: https://iamhtv.github.io/sideproject/dashboard/web-distill.html
+- Quét Facebook: https://iamhtv.github.io/sideproject/dashboard/quet-facebook.html
+- Webapp AI: https://iamhtv.github.io/sideproject/dashboard/webapp-ai.html
 
-Mọi thẻ nằm trong mảng `IDEA_DAYS`, giữa hai marker:
+`dashboard/idea-crawl.html` chỉ là bản lưu lượt 02/11/2026. Kho Tổng không dẫn tới file đó. Đừng thêm ngày mới vào `IDEA_DAYS`.
 
-```javascript
-// IDEA-DAYS-START
-var IDEA_DAYS = [ /* ngày mới nhất đứng đầu */ ];
-// IDEA-DAYS-END
-```
+## JSON một ngày
 
-Phần HTML, CSS và hàm render **ở ngoài** hai marker. Lượt cập nhật chỉ được sửa khối này (tay hoặc bằng script bên dưới). Thanh ngày, chip mảng, số thẻ đều sinh từ mảng — không sửa nav bằng tay.
-
-Mỗi phần tử là một ngày:
+Đầu vào của script là **một object ngày**, không phải file HTML. Thẻ mới nhất không cần bọc thêm mảng.
 
 ```json
 {
@@ -29,78 +32,66 @@ Mỗi phần tử là một ngày:
   "tz": "Asia/Saigon",
   "label": "03/11",
   "heading": "Thứ Ba, 03/11/2026",
-  "note": "Game 5 · Web Distill 5 · FB 3 · Webapp AI 5",
-  "cards": [
-    {
-      "id": "2026-11-03-c1",
-      "track": "game",
-      "title": "Tên thẻ",
-      "preview": "Một đến ba câu hiện trên mặt thẻ.",
-      "fields": [["Nhãn", "HTML chi tiết, có thể chứa <a href=\"...\">link</a>"]],
-      "score": null,
-      "star": false
-    }
-  ]
+  "cards": []
 }
 ```
 
-Quy ước:
+Mỗi thẻ:
 
-- `track` chỉ được là `game`, `distill`, `fb`, hoặc `webapp`.
-- `id` phải duy nhất trong cả kho và bắt đầu bằng ngày: `2026-11-03-c1`, `2026-11-03-c2`, … Không tái sử dụng id của ngày khác. Đổi id của thẻ đã phát hành sẽ làm máy đã bấm Duyệt mất trạng thái (localStorage khoá `htv-idea-crawl-approvals`).
-- `fields` là các cặp `[nhãn, html]`. HTML trong ô thứ hai được gắn nguyên vào mục Chi tiết (link nên có `target="_blank"` và `rel="noopener"`). Nhãn và tiêu đề là chữ thường, không phải HTML.
-- `score`: `null` (thường dùng cho Game) hoặc số. Distill dùng số nguyên 1–5 (hiện sao). Các mảng khác hiện dạng `x/10`.
-- `star: true` chỉ khi muốn viền vàng và nhãn **LÀM NGAY**.
-- Ngày mới nhất đứng **đầu** mảng. Script merge tự sắp theo `date` giảm dần.
+- `id` duy nhất, bắt đầu bằng ngày: `2026-11-03-c1`.
+- `track`: `game`, `distill`, `fb`, hoặc `webapp`.
+- `title`, `preview` (chữ thường, không phải HTML).
+- `fields`: các cặp `[nhãn, html]`. HTML giữ link có `target="_blank"` và `rel="noopener"`.
+- `score`: `null` hoặc số. Distill dùng số nguyên 1–5. FB và webapp dùng số (webapp hiện dạng `x/10`).
+- `star`: `true` hoặc `false`. `true` trên game thành cờ sao; trên webapp thành chữ **LÀM NGAY** trong Chi tiết.
 
-## Cách merge (không xoá ngày cũ)
+Mỗi track **có mặt** trong file phải có từ 3 đến 5 thẻ. Track không có thẻ thì bỏ qua dashboard đó. Không có track thứ năm.
 
-Lưu object **một ngày** (không bọc thêm mảng) thành `ngay-moi.json`, rồi từ gốc repo:
+Nhãn `fields` mà script đọc:
+
+- Game → `Mechanic gốc`, `Twist`, `Vai người chơi`, `Độ khó · thời gian`, `Kênh · ra tiền`. Ghi vào `IDEAS`: `name` = title, `from` = cụm in đậm đầu của mechanic, `round` = `Lượt DD/MM/YYYY`, `time` = độ khó, `play` = preview + twist + vai + kênh + mọi link trong fields. `mid` là id đánh dấu (`i-N`), script tự gán để thẻ cũ không đổi `localStorage`.
+- Distill → `Nguồn gốc…`, `Format chính`, `Ra tiền`. `score` ghi vào `data-stars`. `preview` là dòng tóm tắt.
+- FB → `Vấn đề…`, `Tín hiệu…` (nếu có) thành ô vấn đề; `preview` + `Offer…` + `Khác thẻ…` + `Rủi ro` thành ô ý tưởng. Đúng khung một ngày của trang quét Facebook.
+- Webapp → `Tệp…`, `Nỗi đau…` hoặc `Tín hiệu…`, `Form…`, `Ra tiền`, `Độ khó…`. Chip tệp lấy cụm đầu của câu tệp. `data-stt` nối tiếp số lớn nhất đang có.
+
+## Lệnh
+
+Từ gốc repo, sau khi lưu object ngày thành `ngay-moi.json`:
 
 ```bash
 node scripts/merge-idea-day.js ngay-moi.json
 ```
 
-Script chỉ việc:
+Script:
 
-1. Đọc đúng khối giữa `IDEA-DAYS-START` và `IDEA-DAYS-END`.
-2. Nếu `date` chưa có: thêm ngày đó. Nếu `date` đã có: thay đúng object ngày đó (sửa trong ngày).
-3. Giữ nguyên từng byte dữ liệu của các ngày khác. Nếu phép ghi làm mất hoặc sửa một ngày khác, script thoát lỗi và không ghi file.
-4. Từ chối id trùng, track lạ, hoặc id không gắn với `date` của ngày đó.
-5. Sắp ngày mới nhất lên đầu.
+1. Chia thẻ theo `track` và ghi vào bốn file ở bảng trên.
+2. Chèn ngày mới lên đầu danh sách chờ của từng kho. Thẻ cũ giữ nguyên nội dung và id.
+3. Nếu `date` đã có trong một kho: thay đúng block của ngày đó (marker `IDEA-DAY-YYYY-MM-DD`), không thêm bản sao.
+4. Từ chối track lạ, id trùng, id không gắn với `date`, hoặc track có ít hơn 3 / nhiều hơn 5 thẻ.
+5. Cập nhật số đếm gắn sẵn trên trang (idea chờ duyệt, tổng webapp, ngày cập nhật). Distill và Facebook tự đếm bằng JS khi mở trang.
 
-Sửa file kho khác để thử: `node scripts/merge-idea-day.js ngay-moi.json --html /đường/dẫn/idea-crawl.html`.
-
-Không chạy script này với một file HTML crawl một ngày. Đầu vào là JSON một ngày, đúng khung ở trên.
+Chạy lại cùng một file JSON không được làm đổi thẻ của ngày khác. Nếu script báo ngày khác bị sửa, nó thoát lỗi và không ghi file đó.
 
 ## Sửa tay (khi không chạy được script)
 
-1. Mở `dashboard/idea-crawl.html`, tìm `IDEA-DAYS-START`.
-2. Chèn object ngày mới vào **đầu** mảng `IDEA_DAYS`. Giữ nguyên mọi object phía dưới.
-3. Đừng xoá marker, đừng đổi `var IDEA_DAYS`, đừng đụng CSS/JS bên ngoài.
-4. `id` của thẻ mới theo dạng `YYYY-MM-DD-cN`.
-5. Mở trang, kiểm tra thanh **Các ngày** có thêm chip mới, tab Chờ duyệt vẫn còn thẻ của ngày cũ.
+Chỉ thêm block, đừng xoá thẻ cũ, đừng đổi `data-id` / `data-stt` / `mid` đã phát hành.
+
+1. Game: dán object mới vào đầu `var IDEAS` trong `dashboard/game.html`. Mỗi object có `name`, `from`, `round`, `time`, `play`, và `mid` mới (không trùng). Sửa số “idea chờ duyệt” và số trên tab đầu.
+2. Distill: dán `<article class="card">` ngay dưới comment `BATCH_MOI`. `data-batch` tăng tiếp, `data-id` tăng tiếp, `data-date` dạng `DD/MM/YYYY`.
+3. Facebook: thêm link ngày dưới `DAY-NAV`, thẻ nhìn nhanh dưới `QUICK-ROWS`, `<section class="day">` dưới `DAY-SECTIONS`.
+4. Webapp: dán `<article class="idea-card">` ngay sau `<main id="idea-grid">`. Cập nhật `#total-ideas`, `#total-batches`, `#last-updated`.
 
 ## Kiểm tra trước khi đẩy
 
-- Số thẻ sau cập nhật = số thẻ trước + số thẻ ngày mới (trừ khi đang sửa một ngày đã có — khi đó các ngày khác giữ nguyên số thẻ).
-- Chuỗi ngày cũ, ví dụ `2026-11-02`, vẫn còn trong file.
-- Mỗi `id` xuất hiện đúng một lần.
-- Bốn chip mảng vẫn lọc đúng, mục **Chi tiết** vẫn mở được, nút **Duyệt** chuyển thẻ sang tab Đã duyệt (trạng thái chỉ nằm trên trình duyệt).
+- Mỗi dashboard vẫn còn một thẻ cũ (ví dụ game còn “Mật khẩu phải qua ải sếp”, distill còn batch 8, Facebook còn `d2026-10-25`, webapp còn `#1`).
+- Thẻ của ngày mới đứng trước các thẻ đó.
+- Link trong Chi tiết là link đã có trên thẻ nguồn.
+- Tab Quan tâm / Đã làm vẫn bấm được. Trạng thái vẫn nằm ở `localStorage` của từng trang (`kho-game-marks`, `kho-distill-state-v1`, `kho-facebook-state-v1`, `kho-webapp-state-v1`).
 
 ## GitHub Pages
 
-Site phục vụ từ nhánh `main`, thư mục gốc `/` (`index.html` ở root). File `.nojekyll` để Pages trả HTML tĩnh, không chạy Jekyll.
+Site phục vụ từ nhánh `main`, thư mục gốc `/`. File `.nojekyll` để Pages trả HTML tĩnh.
 
 Bật một lần (nếu chưa bật): repo **Settings → Pages → Build and deployment → Deploy from a branch →** Branch `main`, folder `/ (root)` → Save.
 
-API tương đương, bằng tài khoản có quyền admin repo:
-
-```bash
-gh api --method POST repos/iamHTV/sideproject/pages \
-  -f build_type=legacy \
-  -f source[branch]=main \
-  -f source[path]='/'
-```
-
-Kho chỉ xuất hiện trên URL công khai sau khi commit đã nằm trên `main`.
+Kho chỉ đổi trên URL công khai sau khi commit đã nằm trên `main`.

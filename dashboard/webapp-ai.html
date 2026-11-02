@@ -48,7 +48,7 @@
   .score{display:inline-block;min-width:43px;text-align:center;font-weight:800;border-radius:7px;padding:3px 7px;font-variant-numeric:tabular-nums;font-size:13px}
   .s9{background:#059669;color:#fff}.s8{background:#7c3aed;color:#fff}.s7{background:#f59e0b;color:#fff}.s6{background:#e11d48;color:#fff}
   .tag-row{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
-  .chip{display:inline-block;background:var(--chip);border:1px solid #c4b5fd;color:#5b21b6;border-radius:999px;padding:1px 7px;font-size:11.5px;font-weight:700;white-space:nowrap}
+  .chip{display:inline-block;background:var(--chip);border:1px solid #c4b5fd;color:#5b21b6;border-radius:999px;padding:1px 7px;font-size:11.5px;font-weight:700;white-space:normal}
   .meta{display:grid;gap:6px;margin:0}
   .meta div{display:grid;grid-template-columns:64px 1fr;gap:6px}
   .meta dt{color:var(--mut);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;padding-top:1px}
@@ -71,16 +71,16 @@
   <h1>💡 Kho thẻ ý tưởng Webapp/AI — người không rành công nghệ</h1>
   <p class="sub">Kho thẻ tích luỹ từ các lượt quét hằng ngày. Mở mục “Chi tiết” trong từng thẻ để xem nỗi đau, sản phẩm và bằng chứng. Dùng ô tìm kiếm và các chip lọc để tra cứu nhanh.</p>
   <div class="stats">
-    <span>Tổng ý tưởng: <b id="total-ideas">42</b></span>
-    <span>Số lượt quét: <b id="total-batches">6 + báo cáo nền</b></span>
-    <span>Cập nhật lần cuối: <b id="last-updated">25/10/2026</b></span>
+    <span>Tổng ý tưởng: <b id="total-ideas">47</b></span>
+    <span>Số lượt quét: <b id="total-batches">7 + báo cáo nền</b></span>
+    <span>Cập nhật lần cuối: <b id="last-updated">02/11/2026</b></span>
   </div>
 </header>
 
 <div class="bar">
   <div class="bar-main">
     <input type="search" id="q" placeholder="🔎 Tìm theo tên ý tưởng, tệp, từ khoá...">
-    <label>Sắp xếp: <select id="f-sort"><option value="stt">Theo STT</option><option value="diem-desc">Điểm cao → thấp</option><option value="diem-asc">Điểm thấp → cao</option></select></label>
+    <label>Sắp xếp: <select id="f-sort"><option value="dom">Mới nhất trước</option><option value="stt">Theo STT</option><option value="diem-desc">Điểm cao → thấp</option><option value="diem-asc">Điểm thấp → cao</option></select></label>
   </div>
   <div class="filter-block"><span class="filter-label">Tệp</span><div class="chip-row" id="tep-chips" aria-label="Lọc theo tệp người dùng"></div></div>
   <div class="filter-block"><span class="filter-label">Lượt</span><div class="chip-row" id="luot-chips" aria-label="Lọc theo lượt"></div></div>
@@ -95,6 +95,68 @@
 </div>
 
 <main class="idea-grid" id="idea-grid">
+<!-- IDEA-DAY-2026-11-02-START -->
+<article class="idea-card" data-tep="Viên chức đơn vị sự nghiệp công lập" data-luot="Lượt 7" data-diem="9.1" data-stt="43">
+  <div class="card-top"><span class="idea-num">#43</span><span class="score s9">9,1</span></div>
+  <h2>Phiếu xếp loại viên chức cuối năm theo NĐ 233/2026 — xong trong 5 phút</h2>
+  <div class="tag-row" aria-label="Tệp người dùng"><span class="chip">Viên chức đơn vị sự nghiệp công lập</span></div>
+  <dl class="meta">
+    <div><dt>Độ khó</dt><dd>Dễ</dd></div>
+    <div><dt>Cạnh tranh</dt><dd>Thấp–TB</dd></div>
+    <div class="money"><dt>Ra tiền</dt><dd>29k/phiếu · 79k gói 5 phiếu. Bán ~300 phiếu ≈ 8,7 triệu ≈ $330 trong mùa (tháng 11–12).</dd></div>
+  </dl>
+  <div class="card-foot"><span class="batch-chip">Lượt 7</span><div class="state-btns"><button type="button" class="state-btn" data-state="interested">Quan tâm</button><button type="button" class="state-btn" data-state="done">Đã làm</button></div></div>
+  <details class="idea-details"><summary>Chi tiết</summary><div class="detail-body"><b>LÀM NGAY.</b> <b>Ngày:</b> 02/11/2026. <b>Tệp:</b> Viên chức đơn vị sự nghiệp công lập (y tế, văn hoá, sự nghiệp…); tổ trưởng làm cho cả tổ. Lưu ý: giáo dục xếp loại theo hướng dẫn riêng của Bộ GD&ĐT → bản đầu bỏ qua mảng giáo dục. <b>Nỗi đau:</b> NĐ 233/2026/NĐ-CP ban hành 26/6/2026, mẫu phiếu ở Phụ lục II, xếp loại trước 15/12 hằng năm; ≥90 điểm = xuất sắc, 70–&lt;90 = tốt (tối đa 20% số “tốt” được xuất sắc) (<a href="https://thuvienphapluat.vn/chinh-sach-phap-luat-moi/vn/bieu-mau/116419/mau-phieu-xep-loai-chat-luong-vien-chuc-nam-2026-theo-nghi-dinh-233-2026-nd-cp" target="_blank" rel="noopener">Thư Viện Pháp Luật 03/07/2026</a>). Mẫu mới nên ai cũng đang lúng túng; các trang mẫu chỉ có file Word trống. <b>Sản phẩm:</b> Chọn vị trí việc làm + 5–10 gạch đầu dòng + số liệu (số ca, số hồ sơ…) → AI viết phần tự nhận xét đúng tiêu chí, tự cộng điểm, gợi ý mức xếp loại → xuất .docx đúng mẫu. <b>Ra tiền:</b> 29k/phiếu · 79k gói 5 phiếu. Bán ~300 phiếu ≈ 8,7 triệu ≈ $330 trong mùa (tháng 11–12). <b>Độ khó · cạnh tranh:</b> Dễ · Thấp–TB · tự phục vụ, ≤30’/ngày (chỉ xem log lỗi). Bán theo mùa → tận dụng lại đúng bộ khung form→docx cho thẻ Rirekisho. <b>Tóm tắt:</b> Mẫu phiếu mới áp dụng từ 1/7/2026, phải xếp loại trước 15/12. Gõ gạch đầu dòng việc đã làm → AI viết ưu điểm/hạn chế đúng khung 30 + 70 điểm → tải về .docx đúng mẫu Phụ lục II.</div></details>
+</article>
+<article class="idea-card" data-tep="Lao động Việt tại Nhật" data-luot="Lượt 7" data-diem="8.8" data-stt="44">
+  <div class="card-top"><span class="idea-num">#44</span><span class="score s8">8,8</span></div>
+  <h2>Rirekisho &amp; 職務経歴書 từ form tiếng Việt</h2>
+  <div class="tag-row" aria-label="Tệp người dùng"><span class="chip">Lao động Việt tại Nhật</span></div>
+  <dl class="meta">
+    <div><dt>Độ khó</dt><dd>Dễ–TB</dd></div>
+    <div><dt>Cạnh tranh</dt><dd>Thấp</dd></div>
+    <div class="money"><dt>Ra tiền</dt><dd>59k/bộ · 149k gói 3 lần sửa. Kênh: group Facebook cộng đồng người Việt tại Nhật, SEO “rirekisho tiếng Việt”.</dd></div>
+  </dl>
+  <div class="card-foot"><span class="batch-chip">Lượt 7</span><div class="state-btns"><button type="button" class="state-btn" data-state="interested">Quan tâm</button><button type="button" class="state-btn" data-state="done">Đã làm</button></div></div>
+  <details class="idea-details"><summary>Chi tiết</summary><div class="detail-body"><b>Ngày:</b> 02/11/2026. <b>Tệp:</b> 605.906 lao động Việt tại Nhật (cuối 10/2025), đông nhất trong các nước, chiếm 23,6% lao động nước ngoài (<a href="https://www.mhlw.go.jp/content/11655000/001646131.pdf" target="_blank" rel="noopener">MHLW Nhật (10/2025)</a>; <a href="https://www.nippon.com/ja/articles/-/10386" target="_blank" rel="noopener">nippon.com</a>) + người đang học tiếng chuẩn bị đi. <b>Nỗi đau:</b> Viết CV tiếng Nhật đúng thể thức rất khó với người mới học tiếng; hiện phải nhờ trung tâm hoặc dùng tool tiếng Nhật thuần. <b>Sản phẩm:</b> Form tiếng Việt (học vấn, việc làm, JLPT, kỹ năng, lý do ứng tuyển) → AI viết tiếng Nhật kính ngữ, quy đổi năm → PDF/Excel đúng khổ + bản dịch đối chiếu tiếng Việt để tự kiểm tra. <b>Ra tiền:</b> 59k/bộ · 149k gói 3 lần sửa. Kênh: group Facebook cộng đồng người Việt tại Nhật, SEO “rirekisho tiếng Việt”. <b>Độ khó · cạnh tranh:</b> Dễ–TB · Thấp (tool Nhật miễn phí nhưng giao diện tiếng Nhật). Tự phục vụ, không làm thuê từng bộ. <b>Tóm tắt:</b> Điền bằng tiếng Việt → nhận CV Nhật đúng chuẩn: kính ngữ, đổi năm 和暦/西暦, khổ A4 chuẩn JIS, ô dán ảnh 3×4. Cho người đi Nhật lần đầu hoặc đổi việc diện tokutei.</div></details>
+</article>
+<article class="idea-card" data-tep="Người Việt xin visa du lịch Nhật lần đầu" data-luot="Lượt 7" data-diem="8.4" data-stt="45">
+  <div class="card-top"><span class="idea-num">#45</span><span class="score s8">8,4</span></div>
+  <h2>Lịch trình + checklist visa Nhật tự túc</h2>
+  <div class="tag-row" aria-label="Tệp người dùng"><span class="chip">Người Việt xin visa du lịch Nhật lần đầu</span></div>
+  <dl class="meta">
+    <div><dt>Độ khó</dt><dd>Dễ</dd></div>
+    <div><dt>Cạnh tranh</dt><dd>Trung bình</dd></div>
+    <div class="money"><dt>Ra tiền</dt><dd>49k/hồ sơ; sau mở rộng Hàn Quốc/Schengen. Ghi rõ “không cam kết đậu”.</dd></div>
+  </dl>
+  <div class="card-foot"><span class="batch-chip">Lượt 7</span><div class="state-btns"><button type="button" class="state-btn" data-state="interested">Quan tâm</button><button type="button" class="state-btn" data-state="done">Đã làm</button></div></div>
+  <details class="idea-details"><summary>Chi tiết</summary><div class="detail-body"><b>Ngày:</b> 02/11/2026. <b>Tệp:</b> Người Việt xin visa du lịch Nhật lần đầu, tự làm hồ sơ không qua đại lý. <b>Nỗi đau:</b> ĐSQ yêu cầu lịch trình ghi từng ngày, nơi ở kèm địa chỉ và số điện thoại (<a href="https://www.vn.emb-japan.go.jp/itpr_ja/VN_SVisaTOUR.html" target="_blank" rel="noopener">ĐSQ Nhật tại VN</a>; <a href="https://www.hcmcgj.vn.emb-japan.go.jp/itpr_vi/visa_dulich_tutuc.html" target="_blank" rel="noopener">TLSQ Nhật tại TP.HCM</a>); lý do trượt hay gặp là lịch trình sơ sài/không khớp booking, thông tin mâu thuẫn (<a href="https://visaviettin.vn/ly-do-bi-tu-choi-visa-nhat-ban-2026-pho-bien-nhat-va-cach-khac-phuc-hieu-qua/" target="_blank" rel="noopener">Visa Viettin</a>). <b>Sản phẩm:</b> Form → AI dựng bảng lịch trình (滞在予定表) + cảnh báo ngày lệch + checklist theo nghề (nhân viên/tự do/hưu trí) → PDF/Excel. <b>Ra tiền:</b> 49k/hồ sơ; sau mở rộng Hàn Quốc/Schengen. Ghi rõ “không cam kết đậu”. <b>Độ khó · cạnh tranh:</b> Dễ · Trung bình (đại lý visa, blog hướng dẫn miễn phí). <b>Tóm tắt:</b> Nhập ngày bay, thành phố, khách sạn → ra bảng lịch trình lưu trú ghi từng ngày đúng yêu cầu ĐSQ (địa chỉ, SĐT nơi ở), tự soát khớp ngày với booking + checklist giấy tờ theo nghề.</div></details>
+</article>
+<article class="idea-card" data-tep="Chủ nhóm trẻ/lớp mầm non tư thục nhỏ" data-luot="Lượt 7" data-diem="8" data-stt="46">
+  <div class="card-top"><span class="idea-num">#46</span><span class="score s8">8</span></div>
+  <h2>Thực đơn tuần cho nhóm trẻ tư thục — đạt chuẩn kcal</h2>
+  <div class="tag-row" aria-label="Tệp người dùng"><span class="chip">Chủ nhóm trẻ/lớp mầm non tư thục nhỏ</span></div>
+  <dl class="meta">
+    <div><dt>Độ khó</dt><dd>Trung bình</dd></div>
+    <div><dt>Cạnh tranh</dt><dd>Thấp–TB ở phân khúc nhóm nhỏ</dd></div>
+    <div class="money"><dt>Ra tiền</dt><dd>99k/tháng/nhóm lớp.</dd></div>
+  </dl>
+  <div class="card-foot"><span class="batch-chip">Lượt 7</span><div class="state-btns"><button type="button" class="state-btn" data-state="interested">Quan tâm</button><button type="button" class="state-btn" data-state="done">Đã làm</button></div></div>
+  <details class="idea-details"><summary>Chi tiết</summary><div class="detail-body"><b>Ngày:</b> 02/11/2026. <b>Tệp:</b> Chủ nhóm trẻ/lớp mầm non tư thục nhỏ — trường công thường đã có phần mềm, nhóm nhỏ vẫn tự làm Excel. <b>Nỗi đau:</b> Chuẩn mẫu giáo tại trường 615–726 kcal/ngày, có tỉ lệ đạm/béo/bột đường riêng (<a href="https://luatvietnam.vn/giao-duc/thong-tu-28-2016-tt-bgddt-bo-giao-duc-va-dao-tao-111705-d1.html" target="_blank" rel="noopener">TT 28/2016/TT-BGDĐT</a>; <a href="http://tytphuongtambinh.medinet.gov.vn/cham-soc-suc-khoe-tre-em/cach-tinh-khau-phan-an-cho-tre-mam-non-day-du-dinh-duong-c11045-127741.aspx" target="_blank" rel="noopener">Trạm Y tế P. Tam Bình</a>); trường lớn dùng phần mềm như <a href="http://app.viettechkey.com/tai-lieu-huong-dan-su-dung-phan-mem-tinh-khau-phan-an-vtk-3-0" target="_blank" rel="noopener">phần mềm VTK 3.0</a>. <b>Sản phẩm:</b> Form → thực đơn tuần, số liệu dinh dưỡng tra từ bảng thành phần thực phẩm Việt Nam (KHÔNG để AI tự đoán kcal) → PDF/ảnh thực đơn + danh sách đi chợ. <b>Ra tiền:</b> 99k/tháng/nhóm lớp. <b>Độ khó · cạnh tranh:</b> Trung bình (phải có dữ liệu dinh dưỡng chuẩn) · Thấp–TB ở phân khúc nhóm nhỏ. <b>Tóm tắt:</b> Nhập sĩ số, độ tuổi, tiền ăn mỗi suất → ra thực đơn 5 ngày đạt chuẩn năng lượng, danh sách đi chợ theo gram và bảng thực đơn đẹp để gửi Zalo phụ huynh.</div></details>
+</article>
+<article class="idea-card" data-tep="Bố mẹ, cô chú, anh cả được nhờ phát biểu" data-luot="Lượt 7" data-diem="7.3" data-stt="47">
+  <div class="card-top"><span class="idea-num">#47</span><span class="score s7">7,3</span></div>
+  <h2>Bài phát biểu đại diện hai họ — 3 phút, đúng vai, đúng giọng</h2>
+  <div class="tag-row" aria-label="Tệp người dùng"><span class="chip">Bố mẹ, cô chú, anh cả được nhờ phát biểu</span></div>
+  <dl class="meta">
+    <div><dt>Độ khó</dt><dd>Rất dễ</dd></div>
+    <div><dt>Cạnh tranh</dt><dd>Cao</dd></div>
+    <div class="money"><dt>Ra tiền</dt><dd>29k/bài.</dd></div>
+  </dl>
+  <div class="card-foot"><span class="batch-chip">Lượt 7</span><div class="state-btns"><button type="button" class="state-btn" data-state="interested">Quan tâm</button><button type="button" class="state-btn" data-state="done">Đã làm</button></div></div>
+  <details class="idea-details"><summary>Chi tiết</summary><div class="detail-body"><b>Ngày:</b> 02/11/2026. <b>Tệp:</b> Bố mẹ, cô chú, anh cả được nhờ phát biểu đại diện họ nhà trai/nhà gái. <b>Nỗi đau:</b> Nhiều trang đua nhau đăng “mẫu phát biểu 2026” (<a href="https://tiff.vn/bai-phat-bieu-dam-cuoi-nha-gai/" target="_blank" rel="noopener">tiff.vn</a>; <a href="https://hoatieu.vn/tai-lieu/mau-bai-phat-bieu-dai-dien-ho-nha-gai-215244" target="_blank" rel="noopener">HoaTieu.vn</a>) → có người tìm thật, nhưng mẫu nào cũng chung chung. <b>Sản phẩm:</b> Form → bài cá nhân hoá + bản in A4 chữ to + bản rút gọn 1 phút. <b>Ra tiền:</b> 29k/bài. <b>Độ khó · cạnh tranh:</b> Rất dễ · Cao (mẫu miễn phí + ChatGPT) → điểm thấp nhất nhóm. <b>Tóm tắt:</b> Được nhờ phát biểu đám cưới mùa cưới cuối năm? Điền vai, tên cô dâu chú rể, 2 kỷ niệm, giọng vùng miền → ra bài 2–3 phút + bản in chữ to + thời lượng đọc.</div></details>
+</article>
+<!-- IDEA-DAY-2026-11-02-END -->
 <article class="idea-card" data-tep="Giáo viên" data-luot="Nền" data-diem="9.5" data-stt="1">
   <div class="card-top"><span class="idea-num">#1</span><span class="score s9">9,5</span></div>
   <h2>Nhận xét học sinh hàng loạt từ file điểm (TT27/22)</h2>
@@ -645,7 +707,7 @@
   <details class="idea-details"><summary>Chi tiết</summary><div class="detail-body"><b>Nỗi đau:</b> marketer/shop nhỏ muốn biết đối thủ làm gì nhưng chỉ có cách thủ công: tự vào từng page xem tần suất đăng, loại nội dung và quảng cáo đang chạy — các hướng dẫn đều khuyên “scan your competitors’ Facebook pages” theo cách này. Tool theo dõi đối thủ hiện có (như Sotrender, so sánh tới 8 profile, xem bài nào tương tác cao nhất) làm cho doanh nghiệp lớn, giá và độ phức tạp vượt tầm shop nhỏ. <b>Sản phẩm:</b> nhập 5 page Facebook/TikTok đối thủ → mỗi sáng thứ 2 nhận đúng 1 trang: tuần qua họ đăng gì, bài nào tương tác cao nhất, có quảng cáo mới nào (dữ liệu công khai), kèm 3 gợi ý “tuần này mình làm theo hướng nào”. <b>Dễ dùng:</b> không cần tự lướt, không cần đọc dashboard; đọc 1 trang là biết mình nên đăng gì.</div></details>
 </article>
 
-<!-- CARD_APPEND_MARKER: CƠ CHẾ CHÈN THẺ MỚI — chèn mỗi ý tưởng mới thành ĐÚNG 1 thẻ <article class="idea-card" ...>...</article> ngay TRÊN dòng marker này và vẫn nằm trong <main id="idea-grid">. Mẫu thẻ bắt buộc: <article class="idea-card" data-tep="Tên tệp chính" data-luot="Lượt N" data-diem="X.X" data-stt="STT"> <div class="card-top"><span class="idea-num">#STT</span><span class="score s9/s8/s7/s6">điểm hiển thị bằng dấu phẩy</span></div> <h2>Tên ý tưởng</h2> <div class="tag-row" aria-label="Tệp người dùng"><span class="chip">Tên tệp</span></div> <dl class="meta"><div><dt>Độ khó</dt><dd>...</dd></div><div><dt>Cạnh tranh</dt><dd>...</dd></div><div class="money"><dt>Ra tiền</dt><dd>...</dd></div></dl> <div class="card-foot"><span class="batch-chip">Lượt N</span></div> <details class="idea-details"><summary>Chi tiết</summary><div class="detail-body">...nỗi đau + bằng chứng/nguồn, sản phẩm, vì sao dễ dùng...</div></details> </article>. Class điểm: s9 nếu ≥9, s8 nếu ≥8, s7 nếu ≥7, còn lại s6; data-diem dùng dấu chấm thập phân. Đồng thời cập nhật #total-ideas, #total-batches, #last-updated. Chip lọc tệp/lượt được JS tự sinh từ data-tep/data-luot của các thẻ nên không cần thêm option hay chip thủ công. Thẻ mới BẮT BUỘC có thêm trong card-foot, ngay sau <span class="batch-chip">: <div class="state-btns"><button type="button" class="state-btn" data-state="interested">Quan tâm</button><button type="button" class="state-btn" data-state="done">Đã làm</button></div> — JS tự gắn trạng thái theo data-stt; không sửa tab trạng thái/JS/CSS, không viết lại file. -->
+<!-- CARD_APPEND_MARKER: Ngày mới do scripts/merge-idea-day.js CHÈN LÊN ĐẦU <main id="idea-grid"> (block IDEA-DAY-YYYY-MM-DD), không chèn tay tại marker này. Mẫu thẻ vẫn là <article class="idea-card" ...>...</article> nằm trong <main id="idea-grid">. Mẫu thẻ bắt buộc: <article class="idea-card" data-tep="Tên tệp chính" data-luot="Lượt N" data-diem="X.X" data-stt="STT"> <div class="card-top"><span class="idea-num">#STT</span><span class="score s9/s8/s7/s6">điểm hiển thị bằng dấu phẩy</span></div> <h2>Tên ý tưởng</h2> <div class="tag-row" aria-label="Tệp người dùng"><span class="chip">Tên tệp</span></div> <dl class="meta"><div><dt>Độ khó</dt><dd>...</dd></div><div><dt>Cạnh tranh</dt><dd>...</dd></div><div class="money"><dt>Ra tiền</dt><dd>...</dd></div></dl> <div class="card-foot"><span class="batch-chip">Lượt N</span></div> <details class="idea-details"><summary>Chi tiết</summary><div class="detail-body">...nỗi đau + bằng chứng/nguồn, sản phẩm, vì sao dễ dùng...</div></details> </article>. Class điểm: s9 nếu ≥9, s8 nếu ≥8, s7 nếu ≥7, còn lại s6; data-diem dùng dấu chấm thập phân. Đồng thời cập nhật #total-ideas, #total-batches, #last-updated. Chip lọc tệp/lượt được JS tự sinh từ data-tep/data-luot của các thẻ nên không cần thêm option hay chip thủ công. Thẻ mới BẮT BUỘC có thêm trong card-foot, ngay sau <span class="batch-chip">: <div class="state-btns"><button type="button" class="state-btn" data-state="interested">Quan tâm</button><button type="button" class="state-btn" data-state="done">Đã làm</button></div> — JS tự gắn trạng thái theo data-stt; không sửa tab trạng thái/JS/CSS, không viết lại file. -->
 </main>
 <div class="empty" id="empty-state">Không có ý tưởng nào khớp bộ lọc hiện tại.</div>
 
@@ -703,7 +765,8 @@
     list.sort(function(a,b){
       if(sort==='diem-desc') return parseFloat(b.getAttribute('data-diem'))-parseFloat(a.getAttribute('data-diem'));
       if(sort==='diem-asc') return parseFloat(a.getAttribute('data-diem'))-parseFloat(b.getAttribute('data-diem'));
-      return parseInt(a.getAttribute('data-stt'),10)-parseInt(b.getAttribute('data-stt'),10);
+      if(sort==='stt') return parseInt(a.getAttribute('data-stt'),10)-parseInt(b.getAttribute('data-stt'),10);
+      return 0;
     });
     list.forEach(function(card){grid.appendChild(card);});
     var n=0;

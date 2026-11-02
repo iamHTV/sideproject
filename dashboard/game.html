@@ -270,12 +270,12 @@
 
       <div class="stats">
         <div class="stat"><b>34</b> game gốc đã viral</div>
-        <div class="stat"><b>37</b> idea chờ duyệt</div>
+        <div class="stat"><b>42</b> idea chờ duyệt</div>
         <div class="stat teal"><b>1</b> idea của chính bạn</div>
       </div>
 
       <div class="tabs" role="tablist" aria-label="Các kho game">
-        <button class="tab-btn active" id="btn-tab1" role="tab" aria-selected="true" aria-controls="tab1">Game đã crawl &amp; idea chờ duyệt <span class="count">71</span></button>
+        <button class="tab-btn active" id="btn-tab1" role="tab" aria-selected="true" aria-controls="tab1">Game đã crawl &amp; idea chờ duyệt <span class="count">76</span></button>
         <button class="tab-btn" id="btn-tab2" role="tab" aria-selected="false" aria-controls="tab2">Game bạn duyệt / tự nghĩ ra <span class="count">1</span></button>
         <button class="tab-btn" id="btn-tab3" role="tab" aria-selected="false" aria-controls="tab3">⭐ Quan tâm <span class="count" id="countCare">0</span></button>
         <button class="tab-btn" id="btn-tab4" role="tab" aria-selected="false" aria-controls="tab4">✅ Đã làm <span class="count" id="countDone">0</span></button>
@@ -311,7 +311,7 @@
           <h2>B · Idea Muse đã đề xuất</h2>
           <span class="hand">chờ bạn gật đầu</span>
         </div>
-        <p class="sec-sub">37 idea remix từ các game gốc bên trên, gồm đợt nền 20/10, lượt tối 20/10, lượt 21/10, lượt 22/10, lượt 23/10, lượt 24/10 và lượt 25/10. Tất cả đang ở trạng thái chờ duyệt — con nào ưng, chỉ cần hô số là bắt tay thiết kế chi tiết theo từng buổi 30 phút.</p>
+        <p class="sec-sub">42 idea remix từ các game gốc bên trên, gồm đợt nền 20/10, lượt tối 20/10, lượt 21/10, lượt 22/10, lượt 23/10, lượt 24/10, lượt 25/10 và lượt 02/11. Tất cả đang ở trạng thái chờ duyệt — con nào ưng, chỉ cần hô số là bắt tay thiết kế chi tiết theo từng buổi 30 phút.</p>
         <div class="grid" id="gridB"></div>
         <div class="empty-note" id="emptyB">Không có idea nào khớp từ khóa tìm kiếm.</div>
       </section>
@@ -406,7 +406,7 @@
       </section>
 
       <footer>
-        Số liệu viral (lượt chơi, doanh thu, mốc thời gian) lấy từ các lượt nghiên cứu trong chat “Nghiên cứu Game xàm &amp; độc lạ” — đợt nền, lượt tối 20/10, lượt 21/10, lượt 22/10, lượt 23/10, lượt 24/10 và lượt 25/10/2026.
+        Số liệu viral (lượt chơi, doanh thu, mốc thời gian) lấy từ các lượt nghiên cứu trong chat “Nghiên cứu Game xàm &amp; độc lạ” — đợt nền, lượt tối 20/10, lượt 21/10, lượt 22/10, lượt 23/10, lượt 24/10, lượt 25/10/2026 và lượt 02/11/2026.
       </footer>
     </div>
 
@@ -552,80 +552,93 @@
       ];
 
       /* ============ DỮ LIỆU — NHÓM B: IDEA CHỜ DUYỆT ============ */
+      /* Ngày mới: scripts/merge-idea-day.js chèn block IDEA-DAY lên đầu mảng. mid giữ id đánh dấu, không dùng chỉ số mảng. */
       var IDEAS = [
-        { name:"Mật khẩu phải qua ải sếp", from:"The Password Game", round:"Đợt nền 20/10", time:"2–3 buổi",
+/* IDEA-DAY-2026-11-02-START */
+        { mid:"i-37", name:"Đời Trọ Sài Gòn — mùng 5 chủ trọ gõ cửa", from:"Lagos Life", round:"Lượt 02/11/2026", time:"Trung bình · 6–8 buổi × 30’ (data tĩnh: nghề + sự kiện + giá; state lưu localStorage).",
+          play:"Remix Lagos Life: bạn mới lên phố, chọn nghề, mỗi mùng 5 phải đủ tiền trọ. Khởi đầu “con nhà có điều kiện” hay “vay app 7 ngày” — khoảng cách đó chính là trò chơi. Twist: Bản 1 người chơi, không cần server (tránh bài học Lagos Life bị lỗi in tiền — BusinessDay 5/10/2026 (https://businessday.ng/technology/article/lagos-life-crosses-1m-players-as-nigerian-built-browser-game-goes-viral/)). Bối cảnh trọ Sài Gòn/Đà Nẵng: nghề shipper, phụ quán, IT outsource, bán online; sự kiện điện 3.800đ/số, mưa ngập hẻm, bạn cùng phòng bỏ trốn, mẹ gửi thùng đồ quê. Hết game ra thẻ “Bạn trụ được 7 tháng, nợ 12 triệu, ăn 214 gói mì”. Vai người chơi: Người trẻ mới lên phố thuê trọ, tự lo tiền nhà–tiền ăn–tiền gửi về quê. Kênh · ra tiền: TikTok/Threads/group sinh viên (thẻ kết quả để khoe). Ads + slot “nhãn hàng trong game” (quán cơm, app giao đồ) nếu có traffic — học đúng cách Lagos Life gắn Chowdeck. Tiền: yếu–trung bình. Nguồn: Guardian Nigeria 15/10/2026 (https://guardian.ng/technology/inside-lagos-life-the-browser-game-building-a-virtual-nigerian-economy/); Punch 8/10/2026 (https://punchng.com/nigerian-game-recreating-everyday-lagos-life-goes-viral/); X @marshalnosa 9/10 (https://x.com/marshalnosa/status/2108476047985688717)" },
+        { mid:"i-38", name:"Ổ Gà Mùa Mưa — nuốt cả con phố", from:"Hole.io", round:"Lượt 02/11/2026", time:"Thấp–trung bình · 3–4 buổi (2D nhìn từ trên xuống, canvas, va chạm hình tròn).",
+          play:"Remix Hole.io: bạn là một cái ổ gà, mưa càng to càng nuốt được đồ to — từ dép tổ ong tới xe ben. Đội vá đường đi tuần, bị vá là hết ván. Twist: Hố → ổ gà trên đường ven biển mùa mưa (đoạn Đà Nẵng–Hội An “hễ mưa to là ngập” — Tiền Phong 10/2026 (https://tienphong.vn/giai-cuu-doan-duong-ven-bien-da-nang-di-hoi-an-he-mua-to-la-ngap-post1888660.tpo)). Thanh “mưa” tăng dần: mưa càng to ổ càng sâu. Nuốt nón lá → xe bánh mì → taxi → xe ben. Kẻ thù: đội vá đường cầm xô nhựa đường. Dùng phố hư cấu, giữ tông hài, không chỉ trích địa phương thật. Vai người chơi: Chính cái ổ gà — phản diện đáng yêu của mọi tay lái mùa mưa. Kênh · ra tiền: Clip TikTok “ổ gà nuốt cả xe ben”, đăng đúng tuần mưa to. Tiền: yếu, chỉ có ads. Nguồn: PlayStore Radar (https://playstoreradar.com/game/io.voodoo.holeio); Variety 2018 (https://variety.com/2018/gaming/features/donut-county-hole-io-apple-1202866615/)" },
+        { mid:"i-39", name:"Dọn Trọ 4 Năm Đại Học", from:"Unpacking", round:"Lượt 02/11/2026", time:"Trung bình · 5–7 buổi (kéo thả theo lưới; asset pixel tạo bằng AI rồi sửa tay).",
+          play:"Remix Unpacking: mỗi màn là một lần chuyển trọ, mở thùng xếp đồ. Không có chữ — câu chuyện kể bằng đồ vật, và thùng nào cũng có một chai nước mắm mẹ gửi. Twist: Đời sinh viên Việt từ năm nhất tới lúc đi làm: ký túc xá 8 người → phòng trọ gác lửng → chung cư mini. Đồ quen mặt: nồi cơm điện, thùng mì tôm, quạt con cóc, ảnh người yêu cũ (phải giấu dưới gầm giường), và chai nước mắm quê ở MỌI thùng. Màn cuối: dọn đồ về quê ăn Tết. Vai người chơi: Chính cậu/cô sinh viên đó, tự xếp lại 4 năm đời mình. Kênh · ra tiền: Threads/TikTok mảng hoài niệm, đúng mùa nhập học/tốt nghiệp. Tiền: yếu (ads); nếu hit thì làm bản dài bán $1–3. Nguồn: Game Developer 2/11/2022 (https://www.gamedeveloper.com/business/unpacking-has-topped-1-million-sales-in-one-year)" },
+        { mid:"i-40", name:"Tam Sao Thất Bản Xóm Trọ", from:"Gartic Phone", round:"Lượt 02/11/2026", time:"Thấp–trung bình · 3–5 buổi. Chi phí AI: LLM rẻ, giới hạn 1 ván/ngày; hoặc bảng biến đổi câu viết sẵn để không tốn API.",
+          play:"Remix Gartic Phone bản chơi một mình: bạn tung một tin đồn 6 chữ, 5 “bà hàng xóm AI” chuyền tay — tới cuối, “con bà Tư đậu đại học” thành “bị bắt vì buôn sầu riêng”. Twist: Không cần gom đủ người: hàng xóm AI mỗi người một tật (bà Tư nói quá, chú Ba thêm số liệu, cô Năm gắn vào drama showbiz). Bạn chọn từ ngữ để tin sống sót qua 5 lượt chuyền, hoặc chơi ngược: tung tin nhảm sao cho tới cuối thành tin thật. Có chế độ chuyền 1 máy (pass-and-play) cho nhóm bạn, không cần server. Vai người chơi: Người tung tin đầu ngõ — rồi thành người đi đính chính. Kênh · ra tiền: Ảnh chụp chuỗi tin đồn tự thành meme trên Threads/Facebook. Tiền: yếu (ads). Nguồn: Onrizon (nhà làm game) (https://onrizon.com/en/products/garticphone); Semrush 9/2026 (https://www.semrush.com/website/garticphone.com/overview/)" },
+        { mid:"i-41", name:"Shipper Sống Sót Giờ Tan Tầm", from:"Vampire Survivors", round:"Lượt 02/11/2026", time:"Trung bình · 6–8 buổi (canvas, sinh quái theo đợt, cây nâng cấp).",
+          play:"Remix Vampire Survivors: shipper chỉ việc lái, còi và đèn pha tự “bắn”; quái là xe lấn làn, khách bom hàng, ổ gà. Sống đủ 15 phút là xong ca. Twist: Vòng xoay giờ tan tầm Việt Nam. “Vũ khí” tự bắn: còi, đèn pha, câu “alo em tới rồi”; nâng cấp: áo mưa 2 lớp, sạc dự phòng, bản đồ hẻm tắt, thùng giữ nhiệt. Trùm cuối: khách đổi địa chỉ phút chót. Vai người chơi: Shipper ca chiều, phải giao đủ đơn trước khi điện thoại hết pin. Kênh · ra tiền: TikTok + group shipper/tài xế. Ads; nếu hit thì đưa lên Steam giá $1,99 như cách định giá rẻ của bản gốc. Nguồn: HowItSpread/SteamDB (https://howitspread.com/cases/vampire-survivors); The Guardian 8/2023 (https://www.theguardian.com/games/2023/aug/04/baftas-video-game-vampire-survivors-luca-galante); HowToMarketAGame (https://howtomarketagame.com/2022/01/31/vampire-survivors-success-an-opportunity-in-the-steam-marketplace/)" },
+/* IDEA-DAY-2026-11-02-END */
+        { mid:"i-0", name:"Mật khẩu phải qua ải sếp", from:"The Password Game", round:"Đợt nền 20/10", time:"2–3 buổi",
           play:"Đặt mật khẩu cho hệ thống một công ty hư cấu, luật leo thang kiểu Việt: phải có số chẵn, chứa tên 1 tỉnh, có ngày âm lịch hôm nay, phải “đút” một con gà emoji và cho nó ăn bằng ký tự *. Điểm xàm: luật sau phá luật trước, càng sửa càng sai — người chơi chụp màn hình luật 17 để chửi chung." },
-        { name:"Kiếp nữa bạn sinh ở tỉnh nào?", from:"1 in 8 Billion — dữ liệu Việt Nam", round:"Đợt nền 20/10", time:"4–6 buổi",
+        { mid:"i-1", name:"Kiếp nữa bạn sinh ở tỉnh nào?", from:"1 in 8 Billion — dữ liệu Việt Nam", round:"Đợt nền 20/10", time:"4–6 buổi",
           play:"Bấm một nút, bạn sinh ra ngẫu nhiên theo trọng số dân số ở 1 tỉnh/thành, gia đình giàu/nghèo theo thống kê; đời chạy tự động bằng thẻ sự kiện thuần Việt: học trường làng, đi nghĩa vụ, trúng số hụt, lấy vợ huyện bên… Kết thúc ra “thẻ kiếp” để share. Trần viral cao nhất trong đợt nền." },
-        { name:"Né mưa Đà Nẵng", from:"Raindrop Sprinters — dodge Canvas 2D", round:"Đợt nền 20/10", time:"2–4 buổi",
+        { mid:"i-2", name:"Né mưa Đà Nẵng", from:"Raindrop Sprinters — dodge Canvas 2D", round:"Đợt nền 20/10", time:"2–4 buổi",
           play:"Nhân vật chạy đi làm dưới cơn mưa không phải nước: deadline, tin nhắn “em ơi gấp”, hóa đơn điện, cuộc gọi của mẹ hỏi bao giờ lấy vợ — chạm vào mỗi thứ trừ điểm vì một lý do nhảm khác nhau. Có slow-motion giữ phím cách, điểm tính theo giây sống sót, hợp thách đấu trong group chat." },
-        { name:"Vẽ vòng tròn 99%", from:"Draw a Perfect Circle", round:"Đợt nền 20/10", time:"1–2 buổi",
+        { mid:"i-3", name:"Vẽ vòng tròn 99%", from:"Draw a Perfect Circle", round:"Đợt nền 20/10", time:"1–2 buổi",
           play:"Vẽ một vòng tròn bằng chuột/ngón tay, game chấm % tròn theo độ lệch bán kính kèm danh hiệu trêu ngươi (“tròn như bánh tráng trộn”, “méo như ngân sách cuối tháng”). Nhanh nhất nhì kho — ảnh kết quả tự nó là lời thách đấu." },
-        { name:"Mọi thứ đều thành phở", from:"Universal Paperclips × Tiệm Phở của Anh Hai", round:"Đợt nền 20/10", time:"5–7 buổi",
+        { mid:"i-4", name:"Mọi thứ đều thành phở", from:"Universal Paperclips × Tiệm Phở của Anh Hai", round:"Đợt nền 20/10", time:"5–7 buổi",
           play:"Clicker đen tối: click nấu từng tô phở, mua nồi tự động, thuê nhân viên, mở chuỗi, xuất khẩu phở — cuối cùng nhiệm vụ bí mật hiện ra: phở hóa toàn bộ ẩm thực thế giới. Phần tốn sức là viết nội dung nâng cấp leo thang cho có hồn, không phải code." },
-        { name:"Lái xe đi đâu cũng được", from:"Slow Roads — bản 2.5D Việt Nam", round:"Đợt nền 20/10", time:"8–12 buổi",
+        { mid:"i-5", name:"Lái xe đi đâu cũng được", from:"Slow Roads — bản 2.5D Việt Nam", round:"Đợt nền 20/10", time:"8–12 buổi",
           play:"Không đua, không đích: lái dọc bờ biển sinh ngẫu nhiên, qua đèo Hải Vân lúc hoàng hôn, mưa phùn, sương mù; đổi góc nhìn, bật tự lái để treo máy ngắm. Đẹp nhưng tốn sức nhất kho — để dành khi đã có 1–2 game nhỏ thắng trước." },
-        { name:"Ghép đồ ra meme", from:"Infinite Craft — bản không AI", round:"Đợt nền 20/10", time:"4–5 buổi",
+        { mid:"i-6", name:"Ghép đồ ra meme", from:"Infinite Craft — bản không AI", round:"Đợt nền 20/10", time:"4–5 buổi",
           play:"Bắt đầu với Cơm, Nước Mắm, Mẹ, Internet. Ghép Mẹ + Internet = “mẹ gửi link Facebook”, Cơm + Deadline = “cơm hộp văn phòng”… Bảng ~200 công thức viết sẵn, bộ đếm khám phá lưu bằng localStorage. Trần nội dung dừng ở số công thức viết được, nhưng mỗi công thức là một câu đùa có thể viral lẻ." },
-        { name:"ĐỪNG BẤM CÁI NÚT ĐỎ", from:"Toy tự nghĩ — nhịn bấm nút", round:"Lượt tối 20/10", time:"1 buổi", star:true,
+        { mid:"i-7", name:"ĐỪNG BẤM CÁI NÚT ĐỎ", from:"Toy tự nghĩ — nhịn bấm nút", round:"Lượt tối 20/10", time:"1 buổi", star:true,
           play:"Một màn hình, một nút đỏ to, luật duy nhất là đừng bấm. Nhịn càng lâu điểm càng cao, còn nút thì cà khịa leo thang: “bấm đi, không ai biết đâu”, “sếp bạn vừa bấm đấy”, rung lắc, nhảy né chuột. Bấm một cái là thua + bị máy chê một câu xàm ngẫu nhiên. Được chấm là con đáng làm nhất lượt tối 20/10." },
-        { name:"Trí nhớ thua khỉ", from:"Chimp Test — Human Benchmark", round:"Lượt tối 20/10", time:"1–2 buổi",
+        { mid:"i-8", name:"Trí nhớ thua khỉ", from:"Chimp Test — Human Benchmark", round:"Lượt tối 20/10", time:"1–2 buổi",
           play:"Các số hiện rồi che đi sau tích tắc, bấm theo thứ tự từ nhỏ đến lớn; qua màn tăng số lượng. Cuối ván trả thẻ kết quả: “Trí nhớ của bạn = 62% khỉ Ayumu” — dựa trên thí nghiệm thật của ĐH Kyoto. Câu khoe tự chửi mình, đất diễn là Threads và group học sinh sinh viên." },
-        { name:"Bài Wiki bị bôi đen", from:"Redactle × Wikipedia tiếng Việt", round:"Lượt tối 20/10", time:"3–5 buổi",
+        { mid:"i-9", name:"Bài Wiki bị bôi đen", from:"Redactle × Wikipedia tiếng Việt", round:"Lượt tối 20/10", time:"3–5 buổi",
           play:"Lấy format Redactle vặn sang kho ~200–300 bài Wikipedia tiếng Việt phổ biến: Sơn Tùng M-TP, phở, Đà Nẵng, Quang Trung… Từ chức năng hiện sẵn, đoán từng từ để mở dần bài. Khóa 1 ván/ngày kiểu Wordle để tạo thói quen quay lại." },
-        { name:"Bảo vệ chung cư: Duyệt hay Đuổi?", from:"Papers, Please × bảo vệ chung cư VN", round:"Lượt tối 20/10", time:"4–6 buổi",
+        { mid:"i-10", name:"Bảo vệ chung cư: Duyệt hay Đuổi?", from:"Papers, Please × bảo vệ chung cư VN", round:"Lượt tối 20/10", time:"4–6 buổi",
           play:"Bạn là bảo vệ tòa nhà kiểm tra shipper/khách: mỗi ca một lượt người đến, luật đổi theo ngày (“hôm nay cư dân báo mất đồ — soi kỹ shipper lạ”, “sau 22h không cho đồ ăn lên”), bấm Cho qua / Từ chối. Sai nhiều bị trừ lương, cư dân chửi, rồi bị đuổi việc. — Chính từ con này mà bạn đã nghĩ ra “Vệ Sĩ Cho Idol” ở tab 2." },
-        { name:"Ghép mì thành phở", from:"Suika Game × đồ ăn Việt", round:"Lượt tối 20/10", time:"6–10 buổi",
+        { mid:"i-11", name:"Ghép mì thành phở", from:"Suika Game × đồ ăn Việt", round:"Lượt tối 20/10", time:"6–10 buổi",
           play:"Thả món ăn vào hộp bằng vật lý thật (matter.js), 2 món giống nhau chạm nhau hợp thành món lớn hơn: gói mì → tô mì → bánh mì → tô phở → … → “mâm cỗ Tết”. Đầy hộp là thua. Nặng nhất lượt tối 20/10, nhưng là con có đường ra tiền khả thi nhất nếu hit (bản mobile/Steam như Suika gốc)." },
-        { name:"BÁN TUỔI TRẺ LẤY TIỀN", from:"BLOODMONEY! — clicker twist đen tối", round:"Lượt 21/10", time:"2–3 buổi",
+        { mid:"i-12", name:"BÁN TUỔI TRẺ LẤY TIỀN", from:"BLOODMONEY! — clicker twist đen tối", round:"Lượt 21/10", time:"2–3 buổi",
           play:"Mỗi click là bán đi 1 ngày tuổi trẻ để lấy tiền. Mua “cà phê” thì click nhanh gấp đôi nhưng cũng già nhanh gấp đôi. Cuối game hiện thẻ tổng kết: “Bạn đã bán 3,2 năm thanh xuân được 47 triệu. Đáng không?” Điểm share: meme “bán mình cho tư bản” có sẵn, câu khoe “tao bán 3 năm được 47 triệu” và clip reaction TikTok. Độ khó thấp; kênh TikTok/Threads; tiền yếu trực tiếp, hợp gắn donate." },
-        { name:"NUÔI CON DEADLINE", from:"Tự nghĩ — virtual pet", round:"Lượt 21/10", time:"2–3 buổi",
+        { mid:"i-13", name:"NUÔI CON DEADLINE", from:"Tự nghĩ — virtual pet", round:"Lượt 21/10", time:"2–3 buổi",
           play:"Virtual pet của bạn là một cục deadline sống: tick xong việc thật trong ngày là “cho ăn”, bỏ đói thì nó phình to dần chiếm màn hình, bỏ đói đủ 1 tuần thì game over — “deadline không chờ ai”. Điểm share: biến nỗi ám ảnh dân văn phòng thành pet cưng để khoe “deadline của tao nặng 12kg”. Độ khó thấp; kênh group công sở/Threads; tiền yếu, nhưng giữ chân người chơi hằng ngày rất tốt." },
-        { name:"CÀY THUÊ ĐÌNH CÔNG", from:"Progress Quest — game tự chơi zero-player", round:"Lượt 21/10", time:"3–4 buổi",
+        { mid:"i-14", name:"CÀY THUÊ ĐÌNH CÔNG", from:"Progress Quest — game tự chơi zero-player", round:"Lượt 21/10", time:"3–4 buổi",
           play:"Bạn là “chủ acc”, thuê một anh cày thuê cày level hộ trong lúc bạn đi làm thật. Nhưng anh ta không ngoan ngoãn cày mãi: đòi tăng lương, AFK, và đỉnh điểm là đình công treo acc. Điểm share nằm ở câu khoe: “cày thuê của tao đình công sau 2 ngày”. Độ khó thấp; kênh group game/Threads; tiền yếu, mạnh ở khả năng share." },
-        { name:"ĐÀO GIẾNG TRÚNG CÁP QUANG", from:"A Game About Digging A Hole", round:"Lượt 21/10", time:"3–4 buổi",
+        { mid:"i-15", name:"ĐÀO GIẾNG TRÚNG CÁP QUANG", from:"A Game About Digging A Hole", round:"Lượt 21/10", time:"3–4 buổi",
           play:"Click đào giếng sâu từng mét, bán đất lấy tiền, nâng cấp từ xẻng lên máy xúc. Xen giữa là sự kiện random xàm: đào trúng hóa thạch, rương ông cố để lại, và đào đứt cáp quang AAG bị phạt 50 triệu. Điểm share: khoe kỷ lục độ sâu kiểu “tao đào tới 847m”. Độ khó thấp; kênh TikTok/Threads; nếu hit thì có đường ra bản mở rộng/Steam như bản gốc." },
-        { name:"VUỐT ĐỂ LÀM SẾP", from:"Reigns — swipe quyết định + 4 thanh", round:"Lượt 21/10", time:"4–6 buổi",
+        { mid:"i-16", name:"VUỐT ĐỂ LÀM SẾP", from:"Reigns — swipe quyết định + 4 thanh", round:"Lượt 21/10", time:"4–6 buổi",
           play:"Mỗi thẻ là một tình huống công sở Việt, vuốt trái/phải để quyết, phải giữ cân bằng 4 thanh: tiền công ty, lòng nhân viên, niềm tin của sếp lớn, sức khỏe tinh thần — thanh nào cạn là toang theo đúng kiểu đó. Điểm share: khoe số ngày trụ được, kiểu “trụ 47 ngày thì bị đuổi”. Độ khó thấp–trung bình (phần nặng là viết ~60 tình huống); kênh Threads/group công sở; tiền yếu đến trung bình nếu traffic đều." },
-        { name:"TRÚNG VIETLOTT TIÊU GÌ", from:"Spend Bill Gates' Money — trúng số VN", round:"Lượt 22/10", time:"1–2 buổi",
+        { mid:"i-17", name:"TRÚNG VIETLOTT TIÊU GÌ", from:"Spend Bill Gates' Money — trúng số VN", round:"Lượt 22/10", time:"1–2 buổi",
           play:"Bạn trúng Vietlott 100 tỷ, mua sắm thả ga từ list đồ kiểu VN: nhà mặt phố, xe VinFast, “cho họ hàng vay” là mất luôn, all-in coin bay 50%… Cuối game in bill “tiêu hết 100 tỷ trong 4 phút”. Điểm độc: trúng số là giấc mơ quốc dân, tấm bill tự nó lan trên Threads/TikTok. Độ khó rất thấp (1 trang danh sách + cộng tiền)." },
-        { name:"GỘP NHÀ ĐẤT", from:"2048 — BĐS Việt Nam", round:"Lượt 22/10", time:"1–2 buổi",
+        { mid:"i-18", name:"GỘP NHÀ ĐẤT", from:"2048 — BĐS Việt Nam", round:"Lượt 22/10", time:"1–2 buổi",
           play:"2048 nhưng ô số là nhà đất: 2 ô “phòng trọ 500tr” gộp thành “nhà cấp 4 1 tỷ”, cứ thế leo tới “biệt thự biển”, “tòa Landmark”. Điểm độc: gameplay 2048 gây nghiện đã được chứng minh + insight đất đai của người Việt; khoe screenshot ván leo giá. Độ khó rất thấp (JS thuần)." },
-        { name:"THẢ BI SĂN VOUCHER", from:"Plinko — săn sale VN (nghiên cứu web)", round:"Lượt 22/10", time:"1–2 buổi",
+        { mid:"i-19", name:"THẢ BI SĂN VOUCHER", from:"Plinko — săn sale VN (nghiên cứu web)", round:"Lượt 22/10", time:"1–2 buổi",
           play:"Thả bi miễn phí mỗi ngày 3 lượt, hàng ô dưới là voucher: “freeship”, “giảm 50%”, “chúc bạn may mắn lần sau”. Điểm độc: visual bi nảy đã mắt + săn sale là môn quốc dân; khoe “thả trúng voucher 500k”. Độ khó thấp (vật lý nảy đơn giản)." },
-        { name:"NHẢY VIỆC", from:"Doodle Jump — nhảy việc tăng lương", round:"Lượt 22/10", time:"2–3 buổi",
+        { mid:"i-20", name:"NHẢY VIỆC", from:"Doodle Jump — nhảy việc tăng lương", round:"Lượt 22/10", time:"2–3 buổi",
           play:"Nhảy bục lên cao, mỗi bục là một công ty với bảng lương 8tr → 12tr → 20tr…; bục “công ty ma” chạm là sập, lò xo “headhunter” bật vọt 3 nấc lương. Điểm độc: chuyện thật của dân văn phòng; khoe “nhảy tới 60tr/tháng”. Độ khó thấp (platformer dọc bằng canvas)." },
-        { name:"BẮN MUỖI GIỜ OT", from:"Tự nghĩ — arcade 30 giây", round:"Lượt 22/10", time:"1 buổi",
+        { mid:"i-21", name:"BẮN MUỖI GIỜ OT", from:"Tự nghĩ — arcade 30 giây", round:"Lượt 22/10", time:"1 buổi",
           play:"30 giây đập muỗi trong văn phòng đêm OT: muỗi thường 10đ, muỗi “sếp” béo ú 50đ, đập nhầm đồng nghiệp trừ 20đ. Điểm độc: gọn trong đúng 1 buổi làm, ai từng OT đều thấy mình trong đó; điểm 30 giây thành challenge khoe nhau. Độ khó rất thấp." },
-        { name:"Lặn xuống giếng làng", from:"The Deep Sea — giếng làng Việt Nam", round:"Lượt 23/10", time:"1–2 buổi",
+        { mid:"i-22", name:"Lặn xuống giếng làng", from:"The Deep Sea — giếng làng Việt Nam", round:"Lượt 23/10", time:"1–2 buổi",
           play:"Remix The Deep Sea: cuộn chuột lặn xuống cái giếng làng, càng sâu càng tối, gặp đồ xàm Việt theo từng tầng — 5m cá trê, 12m dép lào, 20m xe đạp Thống Nhất, 35m Nokia rơi từ 2009, 50m nồi cơm điện… Điểm độc: scroll chill mà đồ càng sâu càng cười; khoe “tao lặn tới 87m gặp xe đạp”. Độ khó thấp, 1 trang scroll JS thuần, không backend; kênh TikTok/Threads; tiền yếu, mạnh ở share." },
-        { name:"Nghe 1 giây đoán quảng cáo", from:"Heardle — jingle quảng cáo VN", round:"Lượt 23/10", time:"2–3 buổi",
+        { mid:"i-23", name:"Nghe 1 giây đoán quảng cáo", from:"Heardle — jingle quảng cáo VN", round:"Lượt 23/10", time:"2–3 buổi",
           play:"Nghe 1 giây nhạc hiệu quảng cáo rồi đoán: trà xanh không độ, Closeup, X-Men, Vinamilk… 6 lượt nghe mở dần, đoán càng ít giây điểm càng cao. Điểm độc: hoài niệm 8x–9x đánh thẳng vào ký ức; khoe “tao nghe 1 giây đã biết là Closeup”. Việc tay duy nhất là cắt sẵn ~30 clip nhạc hiệu; kênh group hoài niệm/Facebook; tiền yếu, mạnh ở share." },
-        { name:"Rút thăm rửa bát", from:"Buckshot Roulette — rút thăm may rủi lành mạnh", round:"Lượt 23/10", time:"3–4 buổi",
+        { mid:"i-24", name:"Rút thăm rửa bát", from:"Buckshot Roulette — rút thăm may rủi lành mạnh", round:"Lượt 23/10", time:"3–4 buổi",
           play:"Đấu với máy (bạn cùng phòng AI): 6 lá thăm, trong đó 1 lá “rửa bát cả tuần”. Vật phẩm lật kèo: nhìn trộm 1 lá, đổi lượt rút, xé bỏ 1 lá an toàn… Điểm độc: tim đập thình thịch mỗi lần rút như bản gốc, sinh clip reaction; khoe “tao sống sót 5 vòng”. Độ khó trung bình, không backend; kênh TikTok; tiền yếu trực tiếp — nhưng nếu hit thì bản mobile/party là đường có thật." },
-        { name:"Chờ lương về", from:"Tự nghĩ — đếm ngược ngày lương", round:"Lượt 23/10", time:"1 buổi",
+        { mid:"i-25", name:"Chờ lương về", from:"Tự nghĩ — đếm ngược ngày lương", round:"Lượt 23/10", time:"1 buổi",
           play:"Game đếm ngược tới ngày lương: nhập ngày nhận lương, mỗi ngày mở 1 lần thấy số ngày còn lại + 1 sự kiện xàm random (“ngày 17: ví còn 200k, mì tôm cấp độ 3”); tới ngày lương thì pháo giấy ăn mừng. Điểm độc: nỗi đau chung của dân đi làm, mở hằng ngày thành thói quen. Độ khó rất thấp, 1 màn hình + localStorage; kênh Threads/group công sở; tiền yếu hẳn — để giữ chân + làm content." },
-        { name:"Bấm còi xe máy", from:"Cookie Clicker — còi xe Việt Nam", round:"Lượt 23/10", time:"1–2 buổi",
+        { mid:"i-26", name:"Bấm còi xe máy", from:"Cookie Clicker — còi xe Việt Nam", round:"Lượt 23/10", time:"1–2 buổi",
           play:"Idle clicker bản Việt: mỗi click là 1 tiếng còi “bíp!”. Nâng cấp dần: còi hơi xe tải, còi ô tô, loa phường, dàn karaoke xóm. Twist: bấm quá 1.000 còi/ngày bị “dân mạng chửi”, phải mua “bịt tai chống chửi” mới bấm tiếp được. Điểm độc: bấm còi là quốc hồn quốc túy giao thông Việt; khoe số còi/ngày. Độ khó thấp, JS thuần; kênh TikTok/Threads; tiền yếu, mạnh ở share." },
-        { name:"Sếp tới kìa!", from:"Tự nghĩ — game phản xạ giả vờ bận", round:"Lượt 24/10", time:"5–7 buổi",
+        { mid:"i-27", name:"Sếp tới kìa!", from:"Tự nghĩ — game phản xạ giả vờ bận", round:"Lượt 24/10", time:"5–7 buổi",
           play:"Một màn hình: bạn gõ phím linh tinh giả vờ đang làm việc; sếp bất chợt đi ngang qua, phải bấm đúng phím chuyển sang bảng tính trước khi sếp nhìn thấy màn hình. Càng trụ lâu, sếp đi ngang càng nhanh và bất ngờ. Điểm xàm: khoe “Tôi giả vờ bận được 4 phút 32 giây trước khi sếp bắt gặp” — quay màn hình là có clip TikTok ngay. Độ khó dễ, một màn hình, không tài khoản, không backend; kênh TikTok/Threads/group dân văn phòng; tiền yếu, chủ yếu ads — không tô hồng." },
-        { name:"Xe đẩy chợ: chọn bên nào cũng sai", from:"Absurd Trolley Problems — dilemma đời thường VN", round:"Lượt 24/10", time:"3–5 buổi",
+        { mid:"i-28", name:"Xe đẩy chợ: chọn bên nào cũng sai", from:"Absurd Trolley Problems — dilemma đời thường VN", round:"Lượt 24/10", time:"3–5 buổi",
           play:"Mỗi lượt một tình huống vô lý kiểu Việt Nam — cứu 5 người đang chen mua hàng sale hay 1 người đang giữ nồi phở, cứu thang máy chung cư hay cứu xe máy khỏi ngập — chọn một bên rồi xem tỉ lệ người chọn giống mình. Điểm xàm: cãi nhau là chính, khoe “82% giống tôi”. Tỉ lệ dùng số liệu có sẵn, không cần server vote realtime. Độ khó rất dễ, trang tĩnh; kênh Threads/group Facebook/TikTok dạng ảnh chụp dilemma; tiền yếu, chỉ ads." },
-        { name:"Vẽ logo từ trí nhớ, chấm điểm nhục nhã", from:"Draw Logos From Memory — logo thương hiệu Việt", round:"Lượt 24/10", time:"7–10 buổi",
+        { mid:"i-29", name:"Vẽ logo từ trí nhớ, chấm điểm nhục nhã", from:"Draw Logos From Memory — logo thương hiệu Việt", round:"Lượt 24/10", time:"7–10 buổi",
           play:"Game đưa tên thương hiệu Việt (Vinamilk, Viettel, Highlands, Biti's…), bạn vẽ lại logo bằng chuột/ngón tay trong 30 giây, game chấm % giống bằng cách so sánh nét vẽ với mẫu. Điểm xàm: ảnh vẽ méo mó của bạn đặt cạnh logo thật là thứ người ta khoe ngay. Độ khó trung bình — phần chấm điểm so sánh nét vẽ là phần khó nhất; bản đầu với 10 logo; kênh TikTok/Threads/group Facebook (ảnh trước/sau); tiền trung bình yếu, ads + donate mở thêm gói logo." },
-        { name:"Đời bạn bằng số", from:"Life Stats — đời sống công sở VN", round:"Lượt 24/10", time:"2–3 buổi",
+        { mid:"i-30", name:"Đời bạn bằng số", from:"Life Stats — đời sống công sở VN", round:"Lượt 24/10", time:"2–3 buổi",
           play:"Nhập ngày sinh (không tài khoản), nhận ngay một tấm thẻ số: bạn đã ngủ bao nhiêu năm, tim đập bao nhiêu lần, đã uống bao nhiêu ly cà phê sữa đá, đã chờ thang máy bao nhiêu giờ, đã OT ước tính bao nhiêu ngày. Điểm xàm: tấm thẻ số cá nhân hóa — khoe “Tôi đã chờ thang máy 11 ngày đời”. Độ khó dễ, tính toán tĩnh; kênh Threads/Facebook/Zalo (ảnh thẻ số); tiền yếu, ads; có thể bán mẫu thẻ đẹp." },
-        { name:"Đoán tỉnh qua hình dáng", from:"Worldle — 63 tỉnh Việt Nam", round:"Lượt 24/10", time:"2 tuần",
+        { mid:"i-31", name:"Đoán tỉnh qua hình dáng", from:"Worldle — 63 tỉnh Việt Nam", round:"Lượt 24/10", time:"2 tuần",
           play:"Mỗi ngày một hình dáng tỉnh, 6 lượt đoán; mỗi lượt sai game gợi ý khoảng cách và hướng tới tỉnh đúng; kết quả chia sẻ dạng lưới ô màu kiểu Wordle nhưng không lộ đáp án. Điểm xàm: khoe lưới đoán tỉnh, thách đấu bạn bè cùng quê. Khác hẳn idea cũ “Kiếp nữa bạn sinh ở tỉnh nào” (đó là random, đây là đoán hình). Độ khó trung bình–khó, phần nặng nhất là chuẩn bị dữ liệu hình dáng 63 tỉnh; kênh SEO “đoán tỉnh hôm nay”/Threads/group Facebook địa phương; tiền yếu–trung bình, ads nhờ traffic tìm kiếm hằng ngày." },
-        { name:"Canh nồi cơm điện", from:"Tự nghĩ — game canh thời điểm 1 màn hình", round:"Lượt 25/10/2026", time:"Dễ · bản đầu 2–3 buổi",
+        { mid:"i-32", name:"Canh nồi cơm điện", from:"Tự nghĩ — game canh thời điểm 1 màn hình", round:"Lượt 25/10/2026", time:"Dễ · bản đầu 2–3 buổi",
           play:"Một màn hình duy nhất: nồi cơm đang nấu, việc của bạn là bấm đúng khoảnh khắc cơm vừa chín tới — bấm sớm thì cơm sống, bấm muộn thì khê/cháy. Càng trụ lâu độ khó càng tăng: hơi nước bốc lên che màn hình, mèo nhảy lên bàn chắn tầm nhìn, mất điện chớp tắt. Điểm xàm/chia sẻ: khoe tấm thẻ “cơm ngon 99%” hoặc clip nồi cơm khê đen thui. Kênh lan truyền: TikTok/Threads dạng clip fail; tiền yếu, chỉ ads." },
-        { name:"Tích cho hết giờ làm", from:"One Million Checkboxes — bản solo văn phòng", round:"Lượt 25/10/2026", time:"Dễ · bản đầu 3–5 buổi",
+        { mid:"i-33", name:"Tích cho hết giờ làm", from:"One Million Checkboxes — bản solo văn phòng", round:"Lượt 25/10/2026", time:"Dễ · bản đầu 3–5 buổi",
           play:"Remix One Million Checkboxes thành bản solo văn phòng, không cần server chung: một lưới ô vuông, tích hết mọi ô thì được tan làm. Nhưng lưới có ô troll: ô tự bỏ tích khi bạn quay đi, ô kéo cả hàng bỏ tích theo, ô chỉ tích được khi bấm đúng nhịp. Điểm xàm/chia sẻ: khoe thời gian tan làm kỷ lục kèm số ô bị troll phá. Kênh lan truyền: Threads, group dân văn phòng; tiền yếu, chỉ ads." },
-        { name:"Đoán món 5 chữ", from:"Wordle — tên món ăn Việt", round:"Lượt 25/10/2026", time:"Dễ · bản đầu 3–4 buổi",
+        { mid:"i-34", name:"Đoán món 5 chữ", from:"Wordle — tên món ăn Việt", round:"Lượt 25/10/2026", time:"Dễ · bản đầu 3–4 buổi",
           play:"Remix Wordle: mỗi ngày một món ăn Việt viết không dấu đúng 5 ký tự, 6 lượt đoán, gợi ý màu theo từng chữ đúng/sai vị trí hệt bản gốc. Soạn sẵn kho ~100 món là đủ chạy bản đầu. Điểm xàm/chia sẻ: khoe lưới đoán món không lộ đáp án, tag bạn bè thách đoán cùng — thói quen mở game mỗi sáng như Wordle. Kênh lan truyền: SEO “đoán món hôm nay”, Threads, Facebook; tiền yếu–trung bình nhờ traffic quay lại hằng ngày." },
-        { name:"Gánh hàng không đổ", from:"QWOP — gánh hàng rong Việt Nam", round:"Lượt 25/10/2026", time:"Trung bình–khó · bản đầu 7–10 buổi",
+        { mid:"i-35", name:"Gánh hàng không đổ", from:"QWOP — gánh hàng rong Việt Nam", round:"Lượt 25/10/2026", time:"Trung bình–khó · bản đầu 7–10 buổi",
           play:"Remix QWOP: 4 phím điều khiển 2 chân + giữ thăng bằng đòn gánh, gánh hàng rong lên dốc chợ Việt — đi càng xa hàng càng nặng, dọc đường gặp ổ gà, xe máy tạt ngang, chó đuổi theo sủa. Điểm xàm/chia sẻ: khoe quãng đường gánh được và clip ngã đổ tung tóe cả gánh hàng. Phần nặng nhất là vật lý giữ thăng bằng đòn gánh. Kênh lan truyền: TikTok clip ngã; tiền yếu, chỉ ads/donate." },
-        { name:"Xếp đá chặn lũ", from:"Sai no Kawara — bờ sông Việt mùa lũ", round:"Lượt 25/10/2026", time:"Dễ–trung bình · bản đầu 5–7 buổi",
+        { mid:"i-36", name:"Xếp đá chặn lũ", from:"Sai no Kawara — bờ sông Việt mùa lũ", round:"Lượt 25/10/2026", time:"Dễ–trung bình · bản đầu 5–7 buổi",
           play:"Remix Sai no Kawara sang bờ sông Việt mùa lũ: chạm để xếp đá thành tháp bờ kè, sóng lũ định kỳ ập tới phá tháp, đá rơi xuống thành điểm để gọi thêm người dân và bờ kè tự xếp hộ (idle), tiến độ chơi tiếp bằng localStorage, không cần tài khoản. Điểm xàm/chia sẻ: khoe tháp cao nhất sống sót qua được mấy đợt lũ. Kênh lan truyền: TikTok, Facebook; tiền yếu, chỉ ads." }
       ];
 
@@ -659,7 +672,8 @@
 
       var gridB = document.getElementById("gridB");
       gridB.innerHTML = IDEAS.map(function(it, i){
-        return '<article class="gcard" data-mark-id="i-' + i + '" data-text="' + esc((it.name + " " + it.from + " " + it.play).toLowerCase()) + '">' +
+        var markId = it.mid || ("i-" + i);
+        return '<article class="gcard" data-mark-id="' + esc(markId) + '" data-text="' + esc((it.name + " " + it.from + " " + it.play).toLowerCase()) + '">' +
           '<div class="top"><h3>' + esc(it.name) + (it.star ? ' <span title="Đáng làm nhất lượt đó" aria-label="Đáng làm nhất">★</span>' : '') + '</h3><span class="num">#' + (i + 1) + '</span></div>' +
           '<p class="from">Format gốc: <b>' + esc(it.from) + '</b></p>' +
           '<p class="desc preview">' + esc(it.play) + '</p>' +
