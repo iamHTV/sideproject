@@ -115,9 +115,9 @@
 <body>
 <div class="wrap">
   <a class="home" href="../index.html">← Kho Tổng</a>
-  <p class="kicker">Idea Crawl · Asia/Saigon</p>
-  <h1>Kho thẻ idea</h1>
-  <p class="sub">Thẻ tích lũy theo ngày — Game, Web Distill, FB pain→offer, Webapp AI. Ngày mới nằm trên cùng, ngày cũ giữ nguyên. ⭐ = đề xuất làm ngay. Số liệu và trích dẫn nằm trong mục Chi tiết.</p>
+  <p class="kicker">Bản lưu · không phải kho đang dùng</p>
+  <h1>Bản lưu 02/11/2026</h1>
+  <p class="sub">18 thẻ của lượt 02/11/2026 được giữ ở đây để đối chiếu. Bản đang duyệt nằm ở dashboard Game, Web Distill, Quét Facebook và Webapp AI — mở từ <a href="../index.html">Kho Tổng</a>. Ngày sau gắn bằng <a href="../docs/idea-crawl-update.md">docs/idea-crawl-update.md</a>.</p>
   <div class="stats" id="stats"></div>
   <nav class="days" id="days"><b>Các ngày:</b></nav>
   <div class="tabs">
@@ -130,12 +130,12 @@
   </div>
   <div id="days-root"></div>
   <div class="empty" id="empty">Chưa có thẻ nào ở đây. Bấm “✅ Duyệt” trên một thẻ ở tab Chờ duyệt để đưa nó sang.</div>
-  <p class="note">Nguồn bản quyền Web Distill: 🟢 PD tuyệt đối · 🟡 PD nhưng bản dịch hiện đại còn hạn → kể lại bằng lời mình · 🔴 chỉ chưng cất ý tưởng. Trạng thái duyệt lưu trong trình duyệt (localStorage, khoá <code>htv-idea-crawl-approvals</code>), không đồng bộ sang máy khác. Cách gắn thêm một ngày: <a href="../docs/idea-crawl-update.md">docs/idea-crawl-update.md</a>.</p>
+  <p class="note">Đây là bản lưu một lần, không cộng dồn ngày mới vào file này. Nguồn bản quyền Web Distill: 🟢 PD tuyệt đối · 🟡 PD nhưng bản dịch hiện đại còn hạn → kể lại bằng lời mình · 🔴 chỉ chưng cất ý tưởng.</p>
 </div>
 <script>
 var TR = {"game": ["🎮 Game", "#ff4d8d"], "distill": ["📚 Web Distill", "#7c5cff"], "fb": ["📣 FB pain→offer", "#ff9f1c"], "webapp": ["🤖 Webapp AI", "#00c2a8"]};
-// htvResearch: chỉ thêm/sửa ngày BÊN TRONG hai marker. Ngày mới nhất đứng đầu.
-// Không xoá ngày cũ. Xem docs/idea-crawl-update.md và scripts/merge-idea-day.js
+// Bản lưu lượt 02/11/2026. Ngày mới gắn vào từng dashboard bằng scripts/merge-idea-day.js.
+// Xem docs/idea-crawl-update.md. Không thêm ngày vào IDEA_DAYS.
 // IDEA-DAYS-START
 var IDEA_DAYS = [
   {
