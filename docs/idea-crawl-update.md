@@ -68,7 +68,8 @@ Script:
 2. Chèn ngày mới lên đầu danh sách chờ của từng kho. Thẻ cũ giữ nguyên nội dung và id.
 3. Nếu `date` đã có trong một kho: thay đúng block của ngày đó (marker `IDEA-DAY-YYYY-MM-DD`), không thêm bản sao.
 4. Từ chối track lạ, id trùng, id không gắn với `date`, hoặc track có ít hơn 3 / nhiều hơn 5 thẻ.
-5. Cập nhật số đếm gắn sẵn trên trang (idea chờ duyệt, tổng webapp, ngày cập nhật). Distill và Facebook tự đếm bằng JS khi mở trang.
+5. Cập nhật số đếm gắn sẵn trên trang (idea chờ duyệt, tổng webapp). Distill và Facebook tự đếm bằng JS khi mở trang.
+6. Ghi `Cập nhật lần cuối` (`id="last-updated"`) ở đầu cả bốn dashboard thành giờ Asia/Saigon lúc script chạy, dạng `dd/mm/yyyy HH:mm`.
 
 Chạy lại cùng một file JSON không được làm đổi thẻ của ngày khác. Nếu script báo ngày khác bị sửa, nó thoát lỗi và không ghi file đó.
 
@@ -79,7 +80,7 @@ Chỉ thêm block, đừng xoá thẻ cũ, đừng đổi `data-id` / `data-stt`
 1. Game: dán object mới vào đầu `var IDEAS` trong `dashboard/game.html`. Mỗi object có `name`, `from`, `round`, `time`, `play`, và `mid` mới (không trùng). Sửa số “idea chờ duyệt” và số trên tab đầu.
 2. Distill: dán `<article class="card">` ngay dưới comment `BATCH_MOI`. `data-batch` tăng tiếp, `data-id` tăng tiếp, `data-date` dạng `DD/MM/YYYY`.
 3. Facebook: thêm link ngày dưới `DAY-NAV`, thẻ nhìn nhanh dưới `QUICK-ROWS`, `<section class="day">` dưới `DAY-SECTIONS`.
-4. Webapp: dán `<article class="idea-card">` ngay sau `<main id="idea-grid">`. Cập nhật `#total-ideas`, `#total-batches`, `#last-updated`.
+4. Webapp: dán `<article class="idea-card">` ngay sau `<main id="idea-grid">`. Cập nhật `#total-ideas`, `#total-batches`, và `#last-updated` thành `dd/mm/yyyy HH:mm` (Asia/Saigon). Game, Distill và Facebook cũng có dòng `#last-updated` ở đầu trang — sửa cùng lúc.
 
 ## Kiểm tra trước khi đẩy
 

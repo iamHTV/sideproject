@@ -111,6 +111,28 @@ function dmy(iso) {
   return p[2] + '/' + p[1] + '/' + p[0];
 }
 
+function stampNow() {
+  const fmt = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Saigon',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23'
+  });
+  const parts = {};
+  fmt.formatToParts(new Date()).forEach((p) => { parts[p.type] = p.value; });
+  return parts.day + '/' + parts.month + '/' + parts.year + ' ' + parts.hour + ':' + parts.minute;
+}
+
+function stampLastUpdated(html, fileLabel) {
+  if (html.indexOf('id="last-updated"') < 0) {
+    fail(fileLabel + ': thiếu id="last-updated" để ghi Cập nhật lần cuối');
+  }
+  return html.replace(/(id="last-updated">)[^<]+/, '$1' + stampNow());
+}
+
 function starStr(n) {
   const k = Math.max(0, Math.min(5, n | 0));
   return '★'.repeat(k) + '☆'.repeat(5 - k);
@@ -361,6 +383,7 @@ function mergeGame(html, day, cards) {
   if (outsideBefore.join('\n') !== outsideAfter.join('\n')) {
     fail('game: thẻ cũ bị đổi ngoài ngày ' + day.date);
   }
+  next = stampLastUpdated(next, 'game.html');
   return { html: next, summary: 'game ' + cards.length + ' (idea chờ duyệt: ' + ideaCount + ', tab 1: ' + (gameCount + ideaCount) + ')' };
 }
 
@@ -421,6 +444,7 @@ function mergeDistill(html, day, cards) {
   const expected = beforeArticles + cards.length;
   if (afterArticles !== expected) fail('distill: số thẻ đổi lệch (' + beforeArticles + ' → ' + afterArticles + ', mong ' + expected + ')');
   next = next.replace(/(data-tab="all">Tất cả \()\d+(\))/, '$1' + afterArticles + '$2');
+  next = stampLastUpdated(next, 'web-distill.html');
   return { html: next, summary: 'distill ' + cards.length + ' (batch ' + batch + ', tổng thẻ ' + afterArticles + ')' };
 }
 
@@ -510,6 +534,7 @@ function mergeFb(html, day, cards) {
   if (uniq.size !== ids.length) fail('fb: data-id trùng sau khi gắn ngày ' + day.date);
   if (next.indexOf('id="d' + day.date + '"') < 0) fail('fb: thiếu section ngày');
   if ((next.match(new RegExp('id="d' + day.date + '"', 'g')) || []).length !== 1) fail('fb: section ngày bị lặp');
+  next = stampLastUpdated(next, 'quet-facebook.html');
   return { html: next, summary: 'fb ' + cards.length + ' (ngày ' + day.date + ', ' + (cards.length * 2) + ' ô vấn đề+ý tưởng)' };
 }
 
@@ -575,11 +600,7 @@ function mergeWebapp(html, day, cards) {
   const batchTxt = next.indexOf('data-luot="Nền"') >= 0 ? (luotMax + ' + báo cáo nền') : String(luotMax);
   next = next.replace(/(id="total-ideas">)\d+/, '$1' + n);
   next = next.replace(/(id="total-batches">)[^<]+/, '$1' + batchTxt);
-  const cur = (next.match(/id="last-updated">([^<]+)/) || [])[1] || '';
-  const curIso = cur.split('/').reverse().join('-');
-  if (!curIso || curIso <= day.date) {
-    next = next.replace(/(id="last-updated">)[^<]+/, '$1' + dmy(day.date));
-  }
+  next = stampLastUpdated(next, 'webapp-ai.html');
   const stts = next.match(/data-stt="\d+"/g) || [];
   if (new Set(stts).size !== stts.length) fail('webapp: data-stt trùng');
   return { html: next, summary: 'webapp ' + cards.length + ' (Lượt ' + luot + ', tổng ' + n + ')' };

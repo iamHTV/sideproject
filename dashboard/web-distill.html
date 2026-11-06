@@ -13,6 +13,8 @@
   header.top h1 { font-family: 'Caveat', cursive; font-size: 36px; font-weight: 700; margin: 0; line-height: 1.05; color: #ffffff; text-shadow: 0 2px 6px rgba(4,47,46,.35); }
   header.top .stats { color: #c9f7ec; font-size: 12.5px; margin-top: 3px; }
   header.top .stats b { color: #ffffff; }
+  header.top .updated { color: #ffffff; font-size: 14px; font-weight: 800; margin: 6px 0 0; }
+  header.top .updated b { color: #ffffff; }
   .toolbar { position: sticky; top: 0; z-index: 5; background: rgba(231,251,244,.92); backdrop-filter: blur(4px); padding: 8px 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
   .toolbar input[type="search"] { flex: 1 1 220px; padding: 8px 11px; border: 1.5px solid #2dd4bf; border-radius: 999px; font: inherit; background: #fff; }
   .toolbar input[type="search"]:focus { outline: 2px solid #059669; outline-offset: 0; border-color: transparent; }
@@ -62,6 +64,7 @@
 <div class="wrap">
   <header class="top">
     <h1>Web Distill — Kho ý tưởng</h1>
+    <p class="updated">Cập nhật lần cuối: <b id="last-updated">06/11/2026 20:06</b></p>
     <div class="stats" id="stats">Đang tải…</div>
   </header>
 
